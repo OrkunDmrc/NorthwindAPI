@@ -17,24 +17,8 @@ namespace NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper
     {
         private readonly string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=Northwind;Trusted_Connection=true";
         private readonly Dictionary<string, string> tableNames = new Dictionary<string, string>();
-        public GenericRepository()
-        {
-            /*tableNames.Add("Category", "Categories");
-            tableNames.Add("Customer", "Customers");
-            tableNames.Add("Employee", "Employees");
-            tableNames.Add("EmployeeTerritory", "EmployeeTerritories");
-            tableNames.Add("Order", "Orders");
-            tableNames.Add("OrderDetail", "OrderDetails");
-            tableNames.Add("Product", "Products");
-            tableNames.Add("Region", "Regions");
-            tableNames.Add("Shipper", "Shippers");
-            tableNames.Add("Supply", "Supplies");
-            tableNames.Add("Territory", "Territories");*/
-        }
         public async Task DeleteAsync(T entity)
         {
-            /*await using var connection = new SqlConnection(_connectionString);
-            await connection.ExecuteAsync($"DELETE FROM dbo.{tableNames[nameof(T)]} WHERE Id = {id}");*/
             string tableName = GetTableName();
             string keyColumn = GetKeyColumnName();
             string keyProperty = GetKeyPropertyName();
@@ -45,8 +29,6 @@ namespace NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper
 
         public async Task<T> GetAsync(int id)
         {
-            /*await using var connection = new SqlConnection(_connectionString);
-            return await connection.QueryFirstAsync<T>($"SELECT * FROM dbo.{tableNames[nameof(T)]} WHERE = '{id}'");*/
             string tableName = GetTableName();
             string keyColumn = GetKeyColumnName();
             string query = $"SELECT * FROM {tableName} WHERE {keyColumn} = '{id}'";
@@ -57,8 +39,6 @@ namespace NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper
 
         public async Task<List<T>> GetListAsync()
         {
-            /*await using var connection = new SqlConnection(_connectionString);
-            return (await connection.QueryAsync<T>($"SELECT * FROM dbo.{tableNames[nameof(T)]}")).AsList();*/
             string tableName = GetTableName();
             string query = $"SELECT * FROM {tableName}";
             await using var connection = new SqlConnection(_connectionString);
@@ -68,24 +48,6 @@ namespace NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper
 
         public async Task<T> InsertAsync(T entity)
         {
-            /*var columns = "";
-            var values = "";
-            var props = new List<PropertyInfo>(entity.GetType().GetProperties());
-            foreach (PropertyInfo prop in props)
-            {
-                if (!prop.Name.Contains("ID")) 
-                {
-                    var value = prop.GetValue(entity, null);
-                    columns += prop.Name + ", ";
-                    values += prop.GetType() == typeof(string) || prop.GetType() == typeof(DateTime) ? $"'{value}', " : $"{value}, ";
-                }
-            }
-            columns = columns.Substring(0, columns.Length - 2);
-            values = values.Substring(0, columns.Length - 2);
-            await using var connection = new SqlConnection(_connectionString);
-            var query = $"INSERT INTO dbo.{tableNames[nameof(T)]} {columns} VALUES ({values})";
-            await connection.ExecuteAsync(query);
-            return entity;*/
             string tableName = GetTableName();
             string columns = GetColumns(excludeKey: true);
             string properties = GetPropertyNames(excludeKey: true);
@@ -97,20 +59,6 @@ namespace NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper
 
         public async Task<T> UpdateAsync(int id, T entity)
         {
-            /*var set = "";
-            var props = new List<PropertyInfo>(entity.GetType().GetProperties());
-            foreach (PropertyInfo prop in props)
-            {
-                if (!prop.Name.Contains("ID"))
-                {
-                    var value = prop.GetType() == typeof(string) || prop.GetType() == typeof(DateTime) ? $"'{prop.GetValue(entity, null)}', " : $"{prop.GetValue(entity, null)}";
-                    set += $"{prop.Name} = {value}, ";
-                }
-            }
-            set = set.Substring(0, set.Length - 2);
-            await using var connection = new SqlConnection(_connectionString);
-            await connection.ExecuteAsync($"UPDATE dbo.TodoItems SET {set} WHERE Id = '{id}'");
-            return entity;*/
             string tableName = GetTableName();
             string keyColumn = GetKeyColumnName();
             string keyProperty = GetKeyPropertyName();

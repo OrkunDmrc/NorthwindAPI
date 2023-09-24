@@ -17,18 +17,20 @@ namespace NorthwindAPI.Domain.Entities.Concrete
         public int ProductID { get; set; }
         [Column("ProductName")]
         public string ProductName { get; set; }
+        [Key]
         [Column("SupplierID")]
         public int SupplierID { get; set; }
+        [Key]
         [Column("CategoryID")]
         public int CategoryID { get; set; }
         [Column("QuantityPerUnit")]
         public string QuantityPerUnit { get; set; }
         [Column("UnitPrice")]
         public decimal UnitPrice { get; set; }
-        [Column("UnitInStock")]
-        public int UnitInStock { get; set; }
-        [Column("UnitOnOrder")]
-        public int UnitOnOrder { get; set; }
+        [Column("UnitsInStock")]
+        public int UnitsInStock { get; set; }
+        [Column("UnitsOnOrder")]
+        public int UnitsOnOrder { get; set; }
         [Column("ReorderLevel")]
         public int ReorderLevel { get; set; }
         [Column("Discontinued")]
