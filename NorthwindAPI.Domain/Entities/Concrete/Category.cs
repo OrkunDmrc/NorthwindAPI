@@ -20,6 +20,6 @@ namespace NorthwindAPI.Domain.Entities.Concrete
         [Column("Descripion")]
         public string Descripion { get; set; }
         [Column("Picture")]
-        public string Picture { get; set; }
+        public byte[] Picture { get; set; }
     }
 }

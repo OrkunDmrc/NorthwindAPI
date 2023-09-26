@@ -3,7 +3,7 @@ using NorthwindAPI.Infrastructure.Repositories.Abstract;
 
 namespace NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper
 {
-    public class SupplyRepository : GenericRepository<Supply>, ISupplyRepository
+    public class DapperCustomerRepository : DapperGenericRepository<Customer>, ICustomerRepository
     {
     }
 }

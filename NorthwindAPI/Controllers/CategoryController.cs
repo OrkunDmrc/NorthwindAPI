@@ -6,44 +6,42 @@ namespace NorthwindAPI.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    public class ProductController : ControllerBase
+    public class CategoryController : ControllerBase
     {
-        private readonly IProductService _productService;
-        public ProductController(IProductService productService)
+        private readonly ICategoryService _categoryService;
+        public CategoryController(ICategoryService categoryService)
         {
-            _productService = productService;
+            _categoryService = categoryService;
         }
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _productService.GetListAsync();
+            var result = await _categoryService.GetListAsync();
             return result.Success ? Ok(result.Object) : BadRequest(result.ErrorMessage);
         }
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {
-            var result = await _productService.GetAsync(id);
+            var result = await _categoryService.GetAsync(id);
             return result.Success ? Ok(result.Object) : BadRequest(result.ErrorMessage);
         }
         [HttpPost]
-        public async Task<IActionResult> Post(Product product)
+        public async Task<IActionResult> Post(Category category)
         {
-            var result =  await _productService.InsertAsync(product);
+            var result = await _categoryService.InsertAsync(category);
             return result.Success ? Ok(result.Object) : BadRequest(result.ErrorMessage);
         }
         [HttpPut]
-        public async Task<IActionResult> Put(Product product)
+        public async Task<IActionResult> Put(Category category)
         {
-            var result = await _productService.UpdateAsync(product.ProductID, product);
+            var result = await _categoryService.UpdateAsync(category.CategoryID, category);
             return result.Success ? Ok(result.Object) : BadRequest(result.ErrorMessage);
         }
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _productService.DeleteAsync(id);
+            var result = await _categoryService.DeleteAsync(id);
             return result.Success ? Ok(result.Object) : BadRequest(result.ErrorMessage);
         }
-
     }
-
 }

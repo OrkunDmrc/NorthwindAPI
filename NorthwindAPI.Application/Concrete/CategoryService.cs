@@ -1,5 +1,7 @@
 ﻿using NorthwindAPI.Application.Abstract;
 using NorthwindAPI.Domain.Entities.Concrete;
+using NorthwindAPI.Domain.Results.Abstract;
+using NorthwindAPI.Infrastructure.Repositories.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +12,34 @@ namespace NorthwindAPI.Application.Concrete
 {
     public class CategoryService : ICategoryService
     {
-        public Task DeleteAsync(Category product)
+        private readonly ICategoryRepository _categoryRepository;
+        public CategoryService(ICategoryRepository categoryRepository)
         {
-            throw new NotImplementedException();
+            _categoryRepository = categoryRepository;
+        }
+        public async Task<IResult<Category>> DeleteAsync(int id)
+        {
+            return await _categoryRepository.DeleteAsync(id);
         }
 
-        public Task<Category> GetAsync(int id)
+        public async Task<IResult<Category>> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _categoryRepository.GetAsync(id);
         }
 
-        public Task<List<Category>> GetListAsync()
+        public async Task<IResult<List<Category>>> GetListAsync()
         {
-            throw new NotImplementedException();
+            return await _categoryRepository.GetListAsync();
         }
 
-        public Task<Category> InsertAsync(Category product)
+        public async Task<IResult<Category>> InsertAsync(Category entity)
         {
-            throw new NotImplementedException();
+            return await _categoryRepository.InsertAsync(entity);
         }
 
-        public Task<Category> UpdateAsync(int id, Category product)
+        public async Task<IResult<Category>> UpdateAsync(int id, Category entity)
         {
-            throw new NotImplementedException();
+            return await _categoryRepository.UpdateAsync(id, entity);
         }
     }
 }

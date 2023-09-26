@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using NorthwindAPI.Domain.Entities.Abstract;
+using NorthwindAPI.Domain.Results.Abstract;
+using NorthwindAPI.Domain.Results.Concrete;
 using NorthwindAPI.Infrastructure.Repository.Abstract;
 using System;
 using System.Collections.Generic;
@@ -13,52 +15,47 @@ using System.Threading.Tasks;
 
 namespace NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
+    public class DapperGenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
+        private IResult<T> _result;
+        private IResult<List<T>> _resultList;
         private readonly string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=Northwind;Trusted_Connection=true";
         private readonly Dictionary<string, string> tableNames = new Dictionary<string, string>();
-        public async Task DeleteAsync(T entity)
+
+        public DapperGenericRepository()
         {
-            string tableName = GetTableName();
-            string keyColumn = GetKeyColumnName();
-            string keyProperty = GetKeyPropertyName();
-            string query = $"DELETE FROM {tableName} WHERE {keyColumn} = @{keyProperty}";
-            await using var connection = new SqlConnection(_connectionString);
-            await connection.ExecuteAsync(query, entity);
+            //todo it may be dependency injection
+            _result = new Result<T>();
+            _resultList = new Result<List<T>>();
         }
 
-        public async Task<T> GetAsync(int id)
+        public async Task<IResult<List<T>>> GetListAsync()
+        {
+            string tableName = GetTableName();
+            string query = $"SELECT * FROM {tableName}";
+            return await QueryListAsync(query);
+        }
+
+        public async Task<IResult<T>> GetAsync(int id)
         {
             string tableName = GetTableName();
             string keyColumn = GetKeyColumnName();
             string query = $"SELECT * FROM {tableName} WHERE {keyColumn} = '{id}'";
-            await using var connection = new SqlConnection(_connectionString);
-            var result = connection.Query<T>(query);
-            return result.FirstOrDefault();
+            return await QueryAsync(query);
         }
 
-        public async Task<List<T>> GetListAsync()
-        {
-            string tableName = GetTableName();
-            string query = $"SELECT * FROM {tableName}";
-            await using var connection = new SqlConnection(_connectionString);
-            var result = await connection.QueryAsync<T>(query);
-            return result.ToList();
-        }
-
-        public async Task<T> InsertAsync(T entity)
+        public async Task<IResult<T>> InsertAsync(T entity)
         {
             string tableName = GetTableName();
             string columns = GetColumns(excludeKey: true);
             string properties = GetPropertyNames(excludeKey: true);
             string query = $"INSERT INTO {tableName} ({columns}) VALUES ({properties})";
-            await using var connection = new SqlConnection(_connectionString);
-            await connection.ExecuteAsync(query, entity);
-            return entity;
+            return await ExecuteAsync(query, entity);
         }
 
-        public async Task<T> UpdateAsync(int id, T entity)
+        public async Task<IResult<T>> UpdateAsync(int id, T entity)
         {
+            IResult<T>? result;
             string tableName = GetTableName();
             string keyColumn = GetKeyColumnName();
             string keyProperty = GetKeyPropertyName();
@@ -73,9 +70,70 @@ namespace NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper
             }
             query.Remove(query.Length - 1, 1);
             query.Append($" WHERE {keyColumn} = @{keyProperty}");
-            await using var connection = new SqlConnection(_connectionString);
-            await connection.ExecuteAsync(query.ToString(), entity);
-            return entity;
+            return await ExecuteAsync(query.ToString(), entity);
+        }
+
+        public async Task<IResult<T>> DeleteAsync(int id)
+        {
+            string tableName = GetTableName();
+            string keyColumn = GetKeyColumnName();
+            string query = $"DELETE FROM {tableName} WHERE {keyColumn} = {id}";
+            return await ExecuteAsync(query, null);
+        }
+        private async Task<IResult<List<T>>> QueryListAsync(string query)
+        {
+            try
+            {
+                await using var connection = new SqlConnection(_connectionString);
+                var result = await connection.QueryAsync<T>(query);
+                _resultList.Success = true;
+                _resultList.Object = result?.ToList();
+                _resultList.ErrorMessage = null;
+            }
+            catch (Exception ex)
+            {
+                _resultList.Success = false;
+                _resultList.Object = null;
+                _resultList.ErrorMessage = ex.Message;
+            }
+            return _resultList;
+        }
+        private async Task<IResult<T>> QueryAsync(string query)
+        {
+            try
+            {
+                await using var connection = new SqlConnection(_connectionString);
+                var result = await connection.QueryAsync<T>(query);
+                _result.Success = true;
+                _result.Object = result.FirstOrDefault();
+                _result.ErrorMessage = null;
+            }
+            catch (Exception ex)
+            {
+                _result.Success = false;
+                _result.Object = null;
+                _result.ErrorMessage = ex.Message;
+            }
+            return _result;
+        }
+
+        private async Task<IResult<T>> ExecuteAsync(string query, T entity)
+        {
+            try
+            {
+                await using var connection = new SqlConnection(_connectionString);
+                await connection.ExecuteAsync(query, entity);
+                _result.Success = true;
+                _result.Object = entity;
+                _result.ErrorMessage = null;
+            }
+            catch (Exception ex)
+            {
+                _result.Success = false;
+                _result.Object = entity;
+                _result.ErrorMessage = ex.Message;
+            }
+            return _result;
         }
         private string GetColumns(bool excludeKey = false)
         {
@@ -126,7 +184,6 @@ namespace NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper
                     }
                 }
             }
-
             return null;
         }
         protected string GetPropertyNames(bool excludeKey = false)
@@ -157,9 +214,10 @@ namespace NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper
             {
                 return properties.FirstOrDefault().Name;
             }
-
             return null;
         }
+
+        
     }
 }
 

@@ -1,14 +1,14 @@
 ﻿using NorthwindAPI.Domain.Entities.Abstract;
-
+using NorthwindAPI.Domain.Results.Abstract;
 
 namespace NorthwindAPI.Application.Abstract
 {
     public interface IService<T> where T : class, IEntity
     {
-        Task<List<T>> GetListAsync();
-        Task<T> GetAsync(int id);
-        Task<T> InsertAsync(T entity);
-        Task<T> UpdateAsync(int id, T entity);
-        Task DeleteAsync(T entity);
+        Task<IResult<List<T>>> GetListAsync();
+        Task<IResult<T>> GetAsync(int id);
+        Task<IResult<T>> InsertAsync(T entity);
+        Task<IResult<T>> UpdateAsync(int id, T entity);
+        Task<IResult<T>> DeleteAsync(int id);
     }
 }

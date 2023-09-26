@@ -1,5 +1,6 @@
 ﻿using NorthwindAPI.Application.Abstract;
 using NorthwindAPI.Domain.Entities.Concrete;
+using NorthwindAPI.Domain.Results.Abstract;
 using NorthwindAPI.Infrastructure.Repositories.Abstract;
 
 namespace NorthwindAPI.Application.Concrete
@@ -11,25 +12,25 @@ namespace NorthwindAPI.Application.Concrete
         {
             _productRepository = productRepository;
         }
-        public async Task<List<Product>> GetListAsync()
+        public async Task<IResult<List<Product>>> GetListAsync()
         {
             return await _productRepository.GetListAsync();
         }
-        public async Task<Product> InsertAsync(Product product)
+        public async Task<IResult<Product>> InsertAsync(Product product)
         {
             return await _productRepository.InsertAsync(product);
         }
-        public async Task<Product> GetAsync(int id)
+        public async Task<IResult<Product>> GetAsync(int id)
         {
             return await _productRepository.GetAsync(id);
         }
-        public async Task<Product> UpdateAsync(int id, Product product)
+        public async Task<IResult<Product>> UpdateAsync(int id, Product product)
         {
             return await _productRepository.UpdateAsync(id, product);
         }
-        public async Task DeleteAsync(Product product)
+        public async Task<IResult<Product>> DeleteAsync(int id)
         {
-            await _productRepository.DeleteAsync(product);
+            return await _productRepository.DeleteAsync(id);
         }
     }
 }

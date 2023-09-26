@@ -1,22 +1,18 @@
 ﻿using NorthwindAPI.Domain.Entities.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NorthwindAPI.Domain.Results.Abstract;
 
 namespace NorthwindAPI.Infrastructure.Repository.Abstract
 {
     public interface IGenericRepository<T> where T : class, IEntity
     {
-        Task<List<T>> GetListAsync();
+        Task<IResult<List<T>>> GetListAsync();
 
-        Task<T> GetAsync(int id);
+        Task<IResult<T>> GetAsync(int id);
 
-        Task<T> InsertAsync(T entity);
+        Task<IResult<T>> InsertAsync(T entity);
 
-        Task<T> UpdateAsync(int id, T entity);
+        Task<IResult<T>> UpdateAsync(int id, T entity);
 
-        Task DeleteAsync(T entity);
+        Task<IResult<T>> DeleteAsync(int id);
     }
 }

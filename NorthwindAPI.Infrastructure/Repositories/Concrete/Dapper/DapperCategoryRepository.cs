@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper
 {
-    public class CategoryReposiory : GenericRepository<Category>, ICategoryRepository
+    public class DapperCategoryRepository : DapperGenericRepository<Category>, ICategoryRepository
     {
     }
 }
