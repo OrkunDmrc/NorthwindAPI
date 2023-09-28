@@ -1,7 +1,7 @@
-using NorthwindAPI.Application.Abstract;
-using NorthwindAPI.Application.Concrete;
-using NorthwindAPI.Infrastructure.Repositories.Abstract;
-using NorthwindAPI.Infrastructure.Repositories.Concrete.Dapper;
+using NorthwindAPI.BLL.Services.Abstract;
+using NorthwindAPI.BLL.Services.Concrete;
+using NorthwindAPI.DAL.Repositories.Abstract;
+using NorthwindAPI.DAL.Repositories.Concrete.Dapper;
 
 var builder = WebApplication.CreateBuilder(args);
 

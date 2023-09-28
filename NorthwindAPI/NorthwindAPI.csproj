@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NorthwindAPI.Application\NorthwindAPI.Application.csproj" />
-    <ProjectReference Include="..\NorthwindAPI.Domain\NorthwindAPI.Domain.csproj" />
-    <ProjectReference Include="..\NorthwindAPI.Infrastructure\NorthwindAPI.Infrastructure.csproj" />
+    <ProjectReference Include="..\NorthwindAPI.BLL\NorthwindAPI.BLL.csproj" />
   </ItemGroup>
 
 </Project>

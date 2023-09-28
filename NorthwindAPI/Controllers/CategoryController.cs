@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NorthwindAPI.Application.Abstract;
-using NorthwindAPI.Domain.Entities.Concrete;
+using NorthwindAPI.Core.Entities.Concrete;
+using NorthwindAPI.BLL.Services.Abstract;
 
 namespace NorthwindAPI.Controllers
 {
