@@ -8,7 +8,7 @@ namespace NorthwindAPI.BLL.Services.Abstract
         Task<IResult<List<T>>> GetListAsync();
         Task<IResult<T>> GetAsync(int id);
         Task<IResult<T>> InsertAsync(T entity);
-        Task<IResult<T>> UpdateAsync(int id, T entity);
+        Task<IResult<T>> UpdateAsync(T entity);
         Task<IResult<T>> DeleteAsync(int id);
     }
 }

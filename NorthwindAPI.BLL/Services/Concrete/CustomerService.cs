@@ -26,7 +26,7 @@ namespace NorthwindAPI.BLL.Services.Concrete
             throw new NotImplementedException();
         }
 
-        public Task<IResult<Customer>> UpdateAsync(int id, Customer entity)
+        public Task<IResult<Customer>> UpdateAsync(Customer entity)
         {
             throw new NotImplementedException();
         }

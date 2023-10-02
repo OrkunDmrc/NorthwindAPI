@@ -48,9 +48,8 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             return await ExecuteAsync(query, entity);
         }
 
-        public async Task<IResult<T>> UpdateAsync(int id, T entity)
+        public async Task<IResult<T>> UpdateAsync(T entity)
         {
-            IResult<T>? result;
             string tableName = GetTableName();
             string keyColumn = GetKeyColumnName();
             string keyProperty = GetKeyPropertyName();

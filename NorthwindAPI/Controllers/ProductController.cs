@@ -34,7 +34,7 @@ namespace NorthwindAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(Product product)
         {
-            var result = await _productService.UpdateAsync(product.ProductID, product);
+            var result = await _productService.UpdateAsync(product);
             return result.Success ? Ok(result.Object) : BadRequest(result.ErrorMessage);
         }
         [HttpDelete]

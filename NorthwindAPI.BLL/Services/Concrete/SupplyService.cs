@@ -6,27 +6,27 @@ namespace NorthwindAPI.BLL.Services.Concrete
 {
     public class SupplyService : ISupplyService
     {
-        public Task<IResult<Supply>> DeleteAsync(int id)
+        public Task<IResult<Supplier>> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IResult<Supply>> GetAsync(int id)
+        public Task<IResult<Supplier>> GetAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IResult<List<Supply>>> GetListAsync()
+        public Task<IResult<List<Supplier>>> GetListAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IResult<Supply>> InsertAsync(Supply entity)
+        public Task<IResult<Supplier>> InsertAsync(Supplier entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IResult<Supply>> UpdateAsync(int id, Supply entity)
+        public Task<IResult<Supplier>> UpdateAsync(Supplier entity)
         {
             throw new NotImplementedException();
         }

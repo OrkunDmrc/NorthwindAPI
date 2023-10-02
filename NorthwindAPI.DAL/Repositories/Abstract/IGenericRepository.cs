@@ -11,7 +11,7 @@ namespace NorthwindAPI.DAL.Repository.Abstract
 
         Task<IResult<T>> InsertAsync(T entity);
 
-        Task<IResult<T>> UpdateAsync(int id, T entity);
+        Task<IResult<T>> UpdateAsync(T entity);
 
         Task<IResult<T>> DeleteAsync(int id);
     }

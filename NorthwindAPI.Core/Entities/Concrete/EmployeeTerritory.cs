@@ -10,5 +10,6 @@ namespace NorthwindAPI.Core.Entities.Concrete
     [Table("EmployeeTerritorries")]
     public class EmployeeTerritorry : IEntity
     {
+
     }
 }

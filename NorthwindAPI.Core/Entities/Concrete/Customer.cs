@@ -9,9 +9,11 @@ namespace NorthwindAPI.Core.Entities.Concrete
     {
         [Key]
         [Column("CustomerID")]
-        public int CustomerID { get; set; }
+        public int CustomerId { get; set; }
         [Column("CustomerName")]
         public string CustomerName { get; set; }
+        [Column("CompanyName")]
+        public string CompanyName { get; set; } = null!;
         [Column("ContactName")]
         public string ContactName { get; set; }
         [Column("ContactTitle")]
@@ -30,5 +32,6 @@ namespace NorthwindAPI.Core.Entities.Concrete
         public string Phone { get; set; }
         [Column("Fax")]
         public string Fax { get; set; }
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

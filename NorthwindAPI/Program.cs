@@ -2,6 +2,7 @@ using NorthwindAPI.BLL.Services.Abstract;
 using NorthwindAPI.BLL.Services.Concrete;
 using NorthwindAPI.DAL.Repositories.Abstract;
 using NorthwindAPI.DAL.Repositories.Concrete.Dapper;
+using NorthwindAPI.DAL.Repositories.Concrete.EntityFramework;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +14,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<IProductRepository, DapperProductRepository>();
+//builder.Services.AddSingleton<IProductRepository, EFProductRepository>();
 builder.Services.AddSingleton<ICategoryService, CategoryService>();
 builder.Services.AddSingleton<ICategoryRepository, DapperCategoryRepository>();
+//builder.Services.AddSingleton<ICategoryRepository, EFCategoryRepository>();
 
 var app = builder.Build();
 

@@ -34,7 +34,7 @@ namespace NorthwindAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(Category category)
         {
-            var result = await _categoryService.UpdateAsync(category.CategoryID, category);
+            var result = await _categoryService.UpdateAsync(category);
             return result.Success ? Ok(result.Object) : BadRequest(result.ErrorMessage);
         }
         [HttpDelete]

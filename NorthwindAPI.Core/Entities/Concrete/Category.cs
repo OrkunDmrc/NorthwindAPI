@@ -12,9 +12,10 @@ namespace NorthwindAPI.Core.Entities.Concrete
         public int CategoryID { get; set; }
         [Column("CategoryName")]
         public string CategoryName { get; set; }
-        [Column("Descripion")]
-        public string Descripion { get; set; }
+        [Column("Description")]
+        public string Description { get; set; }
         [Column("Picture")]
         public byte[] Picture { get; set; }
+        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

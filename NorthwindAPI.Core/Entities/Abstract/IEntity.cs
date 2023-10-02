@@ -8,5 +8,6 @@ namespace NorthwindAPI.Core.Entities.Abstract
 {
     public interface IEntity
     {
+        
     }
 }

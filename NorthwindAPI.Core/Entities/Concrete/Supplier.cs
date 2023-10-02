@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace NorthwindAPI.Core.Entities.Concrete
 {
     [Table("Supplies")]
-    public class Supply : IEntity
+    public class Supplier : IEntity
     {
         [Key]
         [Column("SupplierID")]
-        public int SupplierID { get; set; }
+        public int SupplierId { get; set; }
         [Column("CompanyName")]
         public string CompanyName { get; set; }
         [Column("ContactName")]
@@ -32,5 +32,7 @@ namespace NorthwindAPI.Core.Entities.Concrete
         public string Fax { get; set; }
         [Column("HomePage")]
         public string HomePage { get; set; }
+        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+
     }
 }

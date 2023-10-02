@@ -9,26 +9,27 @@ namespace NorthwindAPI.Core.Entities.Concrete
     {
         [Key]
         [Column("ProductID")]
-        public int ProductID { get; set; }
+        public int ProductId { get; set; }
         [Column("ProductName")]
         public string ProductName { get; set; }
-        [Key]
         [Column("SupplierID")]
-        public int SupplierID { get; set; }
-        [Key]
+        public int? SupplierId { get; set; }
         [Column("CategoryID")]
-        public int CategoryID { get; set; }
+        public int? CategoryId { get; set; }
         [Column("QuantityPerUnit")]
-        public string QuantityPerUnit { get; set; }
+        public string? QuantityPerUnit { get; set; }
         [Column("UnitPrice")]
-        public decimal UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
         [Column("UnitsInStock")]
-        public int UnitsInStock { get; set; }
+        public short? UnitsInStock { get; set; }
         [Column("UnitsOnOrder")]
-        public int UnitsOnOrder { get; set; }
+        public short? UnitsOnOrder { get; set; }
         [Column("ReorderLevel")]
-        public int ReorderLevel { get; set; }
+        public short? ReorderLevel { get; set; }
         [Column("Discontinued")]
         public bool Discontinued { get; set; }
+        public virtual Category? Category { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+        public virtual Supplier? Supplier { get; set; }
     }
 }

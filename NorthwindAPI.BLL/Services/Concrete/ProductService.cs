@@ -24,9 +24,9 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             return await _productRepository.GetAsync(id);
         }
-        public async Task<IResult<Product>> UpdateAsync(int id, Product product)
+        public async Task<IResult<Product>> UpdateAsync(Product product)
         {
-            return await _productRepository.UpdateAsync(id, product);
+            return await _productRepository.UpdateAsync(product);
         }
         public async Task<IResult<Product>> DeleteAsync(int id)
         {
