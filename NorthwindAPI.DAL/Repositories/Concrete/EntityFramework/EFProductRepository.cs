@@ -1,4 +1,5 @@
-﻿using NorthwindAPI.Core.Entities.Concrete;
+﻿using NorthwindAPI.Core.Entities.Abstract;
+using NorthwindAPI.Core.Entities.Concrete;
 using NorthwindAPI.DAL.Repositories.Abstract;
 using System;
 using System.Collections.Generic;

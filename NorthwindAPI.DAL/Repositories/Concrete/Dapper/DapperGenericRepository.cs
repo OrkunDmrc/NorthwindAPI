@@ -1,4 +1,6 @@
 ﻿using Dapper;
+using Newtonsoft.Json;
+using NorthwindAPI.Core.ApplicationSettings.Concrete;
 using NorthwindAPI.Core.Entities.Abstract;
 using NorthwindAPI.Core.Results.Abstract;
 using NorthwindAPI.Core.Results.Concrete;
@@ -15,13 +17,19 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
     {
         private IResult<T> _result;
         private IResult<List<T>> _resultList;
-        private readonly string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=Northwind;Trusted_Connection=true";
+        private string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=Northwind;Trusted_Connection=true";
 
         public DapperGenericRepository()
         {
             //todo it may be dependency injection
             _result = new Result<T>();
             _resultList = new Result<List<T>>();
+            using (StreamReader r = new StreamReader("appsettings.json"))
+            {
+                string json = r.ReadToEnd();
+                var settings = JsonConvert.DeserializeObject<APIApplicationSetting>(json);
+                _connectionString = settings?.ConnectionString;
+            }
         }
 
         public async Task<IResult<List<T>>> GetListAsync()
@@ -133,7 +141,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
         {
             var type = typeof(T);
             var columns = string.Join(", ", type.GetProperties()
-                .Where(p => !excludeKey || !p.IsDefined(typeof(KeyAttribute)))
+                .Where(p => p.CustomAttributes.Count() > 0 && p.PropertyType.Name != "ICollection`1" && (!excludeKey || !p.IsDefined(typeof(KeyAttribute))))
                 .Select(p =>
                 {
                     var columnAttr = p.GetCustomAttribute<ColumnAttribute>();
@@ -183,7 +191,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
         protected string GetPropertyNames(bool excludeKey = false)
         {
             var properties = typeof(T).GetProperties()
-                .Where(p => !excludeKey || p.GetCustomAttribute<KeyAttribute>() == null);
+                .Where(p => p.CustomAttributes.Count() > 0 && p.PropertyType.Name != "ICollection`1" && (!excludeKey || p.GetCustomAttribute<KeyAttribute>() == null));
 
             var values = string.Join(", ", properties.Select(p =>
             {
@@ -195,14 +203,14 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
         protected IEnumerable<PropertyInfo> GetProperties(bool excludeKey = false)
         {
             var properties = typeof(T).GetProperties()
-                .Where(p => !excludeKey || p.GetCustomAttribute<KeyAttribute>() == null);
+                .Where(p => p.CustomAttributes.Count() > 0 && p.PropertyType.Name != "ICollection`1" && (!excludeKey || p.GetCustomAttribute<KeyAttribute>() == null));
 
             return properties;
         }
         protected string GetKeyPropertyName()
         {
             var properties = typeof(T).GetProperties()
-                .Where(p => p.GetCustomAttribute<KeyAttribute>() != null);
+                .Where(p => p.CustomAttributes.Count() > 0 && p.PropertyType.Name != "ICollection`1" && p.GetCustomAttribute<KeyAttribute>() != null);
 
             if (properties.Any())
             {
