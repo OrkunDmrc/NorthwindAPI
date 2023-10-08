@@ -8,6 +8,7 @@ using NorthwindAPI.DAL.Repository.Abstract;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlClient;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
@@ -15,30 +16,28 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
 {
     public class DapperGenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
-        private IResult<T> _result;
-        private IResult<List<T>> _resultList;
-        private string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=Northwind;Trusted_Connection=true";
+        protected IResult<T> result;
+        protected IResult<List<T>> resultList;
+        protected string connectionString; //= "Server=(localdb)\\MSSQLLocalDB;Database=Northwind;Trusted_Connection=true";
 
         public DapperGenericRepository()
         {
             //todo it may be dependency injection
-            _result = new Result<T>();
-            _resultList = new Result<List<T>>();
+            result = new Result<T>();
+            resultList = new Result<List<T>>();
             using (StreamReader r = new StreamReader("appsettings.json"))
             {
                 string json = r.ReadToEnd();
                 var settings = JsonConvert.DeserializeObject<APIApplicationSetting>(json);
-                _connectionString = settings?.ConnectionString;
+                connectionString = settings?.ConnectionString;
             }
         }
-
         public async Task<IResult<List<T>>> GetListAsync()
         {
             string tableName = GetTableName();
             string query = $"SELECT * FROM {tableName}";
             return await QueryListAsync(query);
         }
-
         public async Task<IResult<T>> GetAsync(int id)
         {
             string tableName = GetTableName();
@@ -46,7 +45,6 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             string query = $"SELECT * FROM {tableName} WHERE {keyColumn} = '{id}'";
             return await QueryAsync(query);
         }
-
         public async Task<IResult<T>> InsertAsync(T entity)
         {
             string tableName = GetTableName();
@@ -55,7 +53,6 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             string query = $"INSERT INTO {tableName} ({columns}) VALUES ({properties})";
             return await ExecuteAsync(query, entity);
         }
-
         public async Task<IResult<T>> UpdateAsync(T entity)
         {
             string tableName = GetTableName();
@@ -74,7 +71,6 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             query.Append($" WHERE {keyColumn} = @{keyProperty}");
             return await ExecuteAsync(query.ToString(), entity);
         }
-
         public async Task<IResult<T>> DeleteAsync(int id)
         {
             string tableName = GetTableName();
@@ -82,88 +78,100 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             string query = $"DELETE FROM {tableName} WHERE {keyColumn} = {id}";
             return await ExecuteAsync(query, null);
         }
-        private async Task<IResult<List<T>>> QueryListAsync(string query)
+        protected async Task<IResult<List<T>>> QueryListAsync(string query)
         {
             try
             {
-                await using var connection = new SqlConnection(_connectionString);
+                await using var connection = new SqlConnection(connectionString);
                 var result = await connection.QueryAsync<T>(query);
-                _resultList.Success = true;
-                _resultList.Object = result?.ToList();
-                _resultList.ErrorMessage = null;
+                return resultList.FillSuccessResult(result?.ToList());
             }
             catch (Exception ex)
             {
-                _resultList.Success = false;
-                _resultList.Object = null;
-                _resultList.ErrorMessage = ex.Message;
+                return resultList.FillUnsuccessResult(ex.Message);
             }
-            return _resultList;
+            return resultList;
         }
-        private async Task<IResult<T>> QueryAsync(string query)
+        protected async Task<IResult<T>> QueryAsync(string query)
         {
             try
             {
-                await using var connection = new SqlConnection(_connectionString);
+                await using var connection = new SqlConnection(connectionString);
                 var result = await connection.QueryAsync<T>(query);
-                _result.Success = true;
-                _result.Object = result.FirstOrDefault();
-                _result.ErrorMessage = null;
+                return this.result.FillSuccessResult(result.FirstOrDefault());
             }
             catch (Exception ex)
             {
-                _result.Success = false;
-                _result.Object = null;
-                _result.ErrorMessage = ex.Message;
+                return result.FillUnsuccessResult(ex.Message);
             }
-            return _result;
         }
-
-        private async Task<IResult<T>> ExecuteAsync(string query, T entity)
+        protected async Task<IResult<T>> ExecuteAsync(string query, T entity)
         {
             try
             {
-                await using var connection = new SqlConnection(_connectionString);
+                await using var connection = new SqlConnection(connectionString);
                 await connection.ExecuteAsync(query, entity);
-                _result.Success = true;
-                _result.Object = entity;
-                _result.ErrorMessage = null;
+                return result.FillSuccessResult(entity);
             }
             catch (Exception ex)
             {
-                _result.Success = false;
-                _result.Object = entity;
-                _result.ErrorMessage = ex.Message;
+                return result.FillUnsuccessResult(ex.Message);
             }
-            return _result;
         }
-        private string GetColumns(bool excludeKey = false)
+        /*public async Task<IResult<List<T>>> FillListSuccessResult(object resultObject)
         {
-            var type = typeof(T);
+            resultList.Success = true;
+            resultList.Object = (List<T>?)resultObject;
+            resultList.ErrorMessage = null;
+            return resultList;
+        }
+        public async Task<IResult<List<T>>> FillListUnsuccessResult(string errorMessage)
+        {
+            resultList.Success = false;
+            resultList.Object = null;
+            resultList.ErrorMessage = errorMessage;
+            return resultList;
+        }
+        public async Task<IResult<T>> FillSuccessResult(object resultObject)
+        {
+            result.Success = true;
+            result.Object = (T?)resultObject;
+            result.ErrorMessage = null;
+            return result;
+        }
+        public async Task<IResult<T>> FillUnsuccessResult(string errorMessage)
+        {
+            result.Success = false;
+            result.Object = null;
+            result.ErrorMessage = errorMessage;
+            return result;
+        }*/
+        protected string GetColumns(bool excludeKey = false, Type entityType = null, string tableAs = null)
+        {
+            var type = entityType == null ? typeof(T) : entityType;
             var columns = string.Join(", ", type.GetProperties()
                 .Where(p => p.CustomAttributes.Count() > 0 && p.PropertyType.Name != "ICollection`1" && (!excludeKey || !p.IsDefined(typeof(KeyAttribute))))
                 .Select(p =>
                 {
                     var columnAttr = p.GetCustomAttribute<ColumnAttribute>();
-                    return columnAttr != null ? columnAttr.Name : p.Name;
+                    string columnName = columnAttr != null ? columnAttr.Name : p.Name;
+                    return tableAs == null ? columnName : tableAs + "." + columnName;
                 }));
-
             return columns;
         }
-        private string GetTableName()
+        protected string GetTableName(Type entityType = null, string tableAs = null)
         {
             string tableName = "";
-            var type = typeof(T);
+            var type = entityType == null ? typeof(T) : entityType;
             var tableAttr = type.GetCustomAttribute<TableAttribute>();
             if (tableAttr != null)
             {
                 tableName = tableAttr.Name;
-                return tableName;
+                return tableAs == null ? tableName : tableName + " as " + tableAs;
             }
-
-            return type.Name + "s";
+            return tableAs == null ? type.Name + "s" : type.Name + "s" + " as " + tableAs;
         }
-        public static string GetKeyColumnName()
+        protected static string GetKeyColumnName()
         {
             PropertyInfo[] properties = typeof(T).GetProperties();
 
@@ -218,8 +226,6 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             }
             return null;
         }
-
-        
     }
 }
 

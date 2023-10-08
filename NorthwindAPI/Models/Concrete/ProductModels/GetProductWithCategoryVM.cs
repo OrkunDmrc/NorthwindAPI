@@ -1,8 +1,8 @@
-﻿using NorthwindAPI.Models.Abstract;
+﻿using NorthwindAPI.Models.Concrete.Category;
 
 namespace NorthwindAPI.Models.Concrete.ProductModels
 {
-    public class UpdateProductVM : IViewModel
+    public class GetProductWithCategoryVM
     {
         public int ProductId { get; set; }
         public string? ProductName { get; set; }
@@ -14,5 +14,6 @@ namespace NorthwindAPI.Models.Concrete.ProductModels
         public short? UnitsOnOrder { get; set; }
         public short? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
+        public GetCategoryVM Category { get; set; }
     }
 }

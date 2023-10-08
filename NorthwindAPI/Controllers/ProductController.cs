@@ -47,7 +47,18 @@ namespace NorthwindAPI.Controllers
             var result = await _productService.DeleteAsync(id);
             return result.Success ? Ok(_mapper.Map<DeleteProductVM>(result.Object)) : BadRequest(result.ErrorMessage);
         }
-
+        [HttpGet]
+        public async Task<IActionResult> GetByCategory(int categoryId)
+        {
+            var result = await _productService.GetByCategoryIdAsync(categoryId);
+            return result.Success ? Ok(_mapper.Map<List<GetProductByCategoryIdVM>>(result.Object)) : BadRequest(result.ErrorMessage);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetListWithCategory()
+        {
+            var result = await _productService.GetListWithCategory();
+            return result.Success ? Ok(_mapper.Map<List<GetProductWithCategoryVM>>(result.Object)) : BadRequest(result.ErrorMessage);
+        }
     }
 
 }

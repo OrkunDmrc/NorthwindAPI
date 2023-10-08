@@ -8,5 +8,20 @@ namespace NorthwindAPI.Core.Results.Concrete
         public string? ErrorMessage { get; set; }
         public string? Message { get; set; }
         public bool Success { get; set; }
+        public IResult<T> FillSuccessResult(T resultObject)
+        {
+            Success = true;
+            Object = resultObject;
+            ErrorMessage = null;
+            return this;
+        }
+
+        public IResult<T> FillUnsuccessResult(string errorMessage)
+        {
+            Success = false;
+            Object = null;
+            ErrorMessage = errorMessage;
+            return this;
+        }
     }
 }

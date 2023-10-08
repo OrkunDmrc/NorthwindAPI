@@ -2,7 +2,7 @@
 
 namespace NorthwindAPI.Models.Concrete.ProductModels
 {
-    public class DeleteProductVM : IVievModel
+    public class DeleteProductVM : IViewModel
     {
         public int ProductId { get; set; }
         public string? ProductName { get; set; }

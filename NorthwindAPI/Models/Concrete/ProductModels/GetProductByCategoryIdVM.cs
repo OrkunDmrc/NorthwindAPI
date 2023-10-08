@@ -1,8 +1,6 @@
-﻿using NorthwindAPI.Models.Abstract;
-
-namespace NorthwindAPI.Models.Concrete.ProductModels
+﻿namespace NorthwindAPI.Models.Concrete.ProductModels
 {
-    public class UpdateProductVM : IViewModel
+    public class GetProductByCategoryIdVM
     {
         public int ProductId { get; set; }
         public string? ProductName { get; set; }

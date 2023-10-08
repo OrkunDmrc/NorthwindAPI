@@ -1,10 +1,7 @@
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using NorthwindAPI.BLL.Services.Abstract;
 using NorthwindAPI.BLL.Services.Concrete;
 using NorthwindAPI.Core.ApplicationSettings.Concrete;
-using NorthwindAPI.Core.Entities.Abstract;
-using NorthwindAPI.Core.Entities.Concrete;
 using NorthwindAPI.DAL.Repositories.Abstract;
 using NorthwindAPI.DAL.Repositories.Concrete.Dapper;
 using NorthwindAPI.DAL.Repositories.Concrete.EntityFramework;

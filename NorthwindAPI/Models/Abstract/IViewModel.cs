@@ -1,6 +1,6 @@
 ﻿namespace NorthwindAPI.Models.Abstract
 {
-    public interface IVievModel
+    public interface IViewModel
     {
     }
 }

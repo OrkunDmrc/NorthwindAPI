@@ -1,5 +1,6 @@
 ﻿using NorthwindAPI.Core.Entities.Abstract;
 using NorthwindAPI.Core.Results.Abstract;
+using System.Linq.Expressions;
 
 namespace NorthwindAPI.DAL.Repository.Abstract
 {
@@ -14,5 +15,10 @@ namespace NorthwindAPI.DAL.Repository.Abstract
         Task<IResult<T>> UpdateAsync(T entity);
 
         Task<IResult<T>> DeleteAsync(int id);
+       /* Task<IResult<List<T>>> FillListSuccessResult(object resultObject);
+        Task<IResult<List<T>>> FillListUnsuccessResult(string errorMessage);
+        Task<IResult<T>> FillSuccessResult(object resultObject);
+        Task<IResult<T>> FillUnsuccessResult(string errorMessage);*/
+
     }
 }

@@ -2,7 +2,7 @@
 
 namespace NorthwindAPI.Models.Concrete.ProductModels
 {
-    public class AddProductVM : IVievModel
+    public class AddProductVM : IViewModel
     {
         public string? ProductName { get; set; }
         public int? SupplierId { get; set; }
