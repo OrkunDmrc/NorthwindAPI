@@ -2,7 +2,7 @@
 
 namespace NorthwindAPI.BLL.Services.Abstract
 {
-    public interface ISupplyService : IService<Supplier>
+    public interface ISupplyService : IService<Supply>
     {
     }
 }

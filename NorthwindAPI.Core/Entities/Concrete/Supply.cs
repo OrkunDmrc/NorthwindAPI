@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace NorthwindAPI.Core.Entities.Concrete
 {
     [Table("Supplies")]
-    public class Supplier : IEntity
+    public class Supply : IEntity
     {
         [Key]
         [Column("SupplierID")]

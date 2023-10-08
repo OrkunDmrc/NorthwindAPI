@@ -118,34 +118,6 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
                 return result.FillUnsuccessResult(ex.Message);
             }
         }
-        /*public async Task<IResult<List<T>>> FillListSuccessResult(object resultObject)
-        {
-            resultList.Success = true;
-            resultList.Object = (List<T>?)resultObject;
-            resultList.ErrorMessage = null;
-            return resultList;
-        }
-        public async Task<IResult<List<T>>> FillListUnsuccessResult(string errorMessage)
-        {
-            resultList.Success = false;
-            resultList.Object = null;
-            resultList.ErrorMessage = errorMessage;
-            return resultList;
-        }
-        public async Task<IResult<T>> FillSuccessResult(object resultObject)
-        {
-            result.Success = true;
-            result.Object = (T?)resultObject;
-            result.ErrorMessage = null;
-            return result;
-        }
-        public async Task<IResult<T>> FillUnsuccessResult(string errorMessage)
-        {
-            result.Success = false;
-            result.Object = null;
-            result.ErrorMessage = errorMessage;
-            return result;
-        }*/
         protected string GetColumns(bool excludeKey = false, Type entityType = null, string tableAs = null)
         {
             var type = entityType == null ? typeof(T) : entityType;

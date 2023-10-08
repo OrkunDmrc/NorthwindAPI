@@ -19,8 +19,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<ICategoryService, CategoryService>();
+
+
 if (settings.ORM.ToLower() == "dapper")
 {
     builder.Services.AddSingleton<IProductRepository, DapperProductRepository>();

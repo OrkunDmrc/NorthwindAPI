@@ -1,4 +1,4 @@
-﻿using NorthwindAPI.Models.Concrete.Category;
+﻿using NorthwindAPI.Models.Concrete.CategoryModels;
 
 namespace NorthwindAPI.Models.Concrete.ProductModels
 {

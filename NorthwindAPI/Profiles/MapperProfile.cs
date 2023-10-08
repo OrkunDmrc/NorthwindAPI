@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using NorthwindAPI.Core.Entities.Concrete;
-using NorthwindAPI.Models.Concrete.Category;
+using NorthwindAPI.Models.Concrete.CategoryModels;
 using NorthwindAPI.Models.Concrete.ProductModels;
 
 namespace NorthwindAPI.Profiles
@@ -29,6 +29,12 @@ namespace NorthwindAPI.Profiles
             #region Category
             CreateMap<Category, GetCategoryVM>();
             CreateMap<GetCategoryVM, Category>();
+            CreateMap<Category, DeleteCategoryVM>();
+            CreateMap<DeleteCategoryVM, Category>();
+            CreateMap<Category, UpdateCategoryVM>();
+            CreateMap<UpdateCategoryVM, Category>();
+            CreateMap<Category, AddCategoryVM>();
+            CreateMap<AddCategoryVM, Category>();
             #endregion
 
 

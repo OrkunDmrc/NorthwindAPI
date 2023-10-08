@@ -3,7 +3,7 @@ using NorthwindAPI.DAL.Repository.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Abstract
 {
-    public interface ISupplyRepository : IGenericRepository<Supplier>
+    public interface ISupplyRepository : IGenericRepository<Supply>
     {
     }
 }

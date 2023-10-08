@@ -264,7 +264,7 @@ public partial class NorthwindContext : DbContext
             entity.Property(e => e.Phone).HasMaxLength(24);
         });
 
-        modelBuilder.Entity<Supplier>(entity =>
+        modelBuilder.Entity<Supply>(entity =>
         {
             entity.HasIndex(e => e.CompanyName, "CompanyName");
 
