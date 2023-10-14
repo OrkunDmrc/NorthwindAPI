@@ -9,7 +9,7 @@ namespace NorthwindAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class SupplierController : Controller
+    public class SupplierController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly ISupplierService _supplierService;

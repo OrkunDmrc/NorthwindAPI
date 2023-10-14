@@ -11,7 +11,8 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
         public async Task<IResult<Supplier>> GetByProductId(int id)
         {
             string query = $"SELECT {GetColumns(tableAs: "s")} FROM {GetTableName(tableAs: "s")}, {GetTableName(entityType: typeof(Product), tableAs: "p")}  where p.ProductID = {id} and s.SupplierID = p.CategoryID";
-            try
+            return await QueryAsync(query);
+            /*try
             {
                 await using var connection = new SqlConnection(connectionString);
                 var queryResult = await connection.QuerySingleOrDefaultAsync<Supplier>(query);
@@ -20,7 +21,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             catch (Exception ex)
             {
                 return result.FillUnsuccessResult(ex.Message);
-            }
+            }*/
         }
     }
 }

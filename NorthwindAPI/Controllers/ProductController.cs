@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NorthwindAPI.BLL.Services.Abstract;
 using NorthwindAPI.Core.Entities.Concrete;
 using NorthwindAPI.Models.Concrete.CategoryModels;
+using NorthwindAPI.Models.Concrete.OrderDetailModels;
 using NorthwindAPI.Models.Concrete.ProductModels;
 using NorthwindAPI.Models.Concrete.SuypplierModels;
 
@@ -16,12 +17,14 @@ namespace NorthwindAPI.Controllers
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly ISupplierService _supplyService;
-        public ProductController(IMapper mapper, IProductService productService, ICategoryService categoryService, ISupplierService supplyService)
+        private readonly IOrderDetailService _orderDetailService;
+        public ProductController(IMapper mapper, IProductService productService, ICategoryService categoryService, ISupplierService supplyService, IOrderDetailService orderDetailService)
         {
             _productService = productService;
             _mapper = mapper;
             _categoryService = categoryService;
             _supplyService = supplyService;
+            _orderDetailService = orderDetailService;
         }
         [HttpGet]
         [Route("/Products")]
@@ -65,10 +68,17 @@ namespace NorthwindAPI.Controllers
         }
         [HttpGet]
         [Route("/Products/{id}/Supplier")]
-        public async Task<IActionResult> GetSupplyerByProductId(int id)
+        public async Task<IActionResult> GetSupplierByProductId(int id)
         {
             var result = await _supplyService.GetByProductId(id);
             return result.Success ? Ok(_mapper.Map<GetSupplierVM>(result.Object)) : BadRequest(result.ErrorMessage);
+        }
+        [HttpGet]
+        [Route("/Products/{id}/OrderDetails")]
+        public async Task<IActionResult> GetOrderDetailByProductId(int id)
+        {
+            var result = await _orderDetailService.GetListByProductId(id);
+            return result.Success ? Ok(_mapper.Map<List<GetOrderDetailVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         /*[HttpGet]
         //category controller 

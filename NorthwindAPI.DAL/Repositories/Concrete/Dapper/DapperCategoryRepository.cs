@@ -10,8 +10,9 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
     {
         public async Task<IResult<Category>> GetByProductId(int id)
         {
-            string query = $"SELECT {GetColumns(tableAs: "c")} FROM {GetTableName(tableAs: "c")}, {GetTableName(entityType: typeof(Product), tableAs: "p")}  where p.ProductID = {id} and c.CategoryID = p.CategoryID";
-            try
+            var query = $"SELECT {GetColumns(tableAs: "c")} FROM {GetTableName(tableAs: "c")}, {GetTableName(entityType: typeof(Product), tableAs: "p")}  where p.ProductID = {id} and c.CategoryID = p.CategoryID";
+            return await QueryAsync(query);
+            /*try
             {
                 await using var connection = new SqlConnection(connectionString);
                 var queryResult = await connection.QuerySingleOrDefaultAsync<Category>(query);
@@ -20,7 +21,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             catch (Exception ex)
             {
                 return result.FillUnsuccessResult(ex.Message);
-            }
+            }*/
         }
     }
 }

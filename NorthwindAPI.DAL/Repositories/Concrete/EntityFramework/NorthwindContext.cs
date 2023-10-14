@@ -186,7 +186,7 @@ public partial class NorthwindContext : DbContext
         {
             entity.HasKey(e => new { e.OrderId, e.ProductId }).HasName("PK_Order_Details");
 
-            entity.ToTable("Order Details");
+            entity.ToTable("OrdersDetails");
 
             entity.HasIndex(e => e.OrderId, "OrderID");
 

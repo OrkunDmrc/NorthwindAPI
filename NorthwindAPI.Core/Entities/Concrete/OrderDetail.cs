@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NorthwindAPI.Core.Entities.Concrete
 {
-    [Table("OrderDetail")]
+    [Table("OrdersDetails")]
     public class OrderDetail : IEntity
     {
         [Key]

@@ -23,6 +23,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<ICategoryService, CategoryService>();
 builder.Services.AddSingleton<ISupplierService, SupplierService>();
+builder.Services.AddSingleton<IOrderDetailService, OrderDetailService>();
 
 
 if (settings.ORM.ToLower() == "dapper")
@@ -30,12 +31,14 @@ if (settings.ORM.ToLower() == "dapper")
     builder.Services.AddSingleton<IProductRepository, DapperProductRepository>();
     builder.Services.AddSingleton<ICategoryRepository, DapperCategoryRepository>();
     builder.Services.AddSingleton<ISupplierRepository, DapperSupplierRepository>();
+    builder.Services.AddSingleton<IOrderDetailRepository, DapperOrderDetailRepository>();
 }
 else if(settings.ORM.ToLower() == "ef")
 {
     builder.Services.AddSingleton<IProductRepository, EFProductRepository>();
     builder.Services.AddSingleton<ICategoryRepository, EFCategoryRepository>();
     builder.Services.AddSingleton<ISupplierRepository, EFSupplierRepository>();
+    builder.Services.AddSingleton<IOrderDetailRepository, EFOrderDetailRepository>();
 }
 var app = builder.Build();
 

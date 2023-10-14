@@ -97,8 +97,8 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             try
             {
                 await using var connection = new SqlConnection(connectionString);
-                var result = await connection.QueryAsync<T>(query);
-                return this.result.FillSuccessResult(result.FirstOrDefault());
+                var queryResult = await connection.QuerySingleOrDefaultAsync<T>(query);
+                return result.FillSuccessResult(queryResult);
             }
             catch (Exception ex)
             {

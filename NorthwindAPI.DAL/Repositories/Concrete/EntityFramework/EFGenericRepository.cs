@@ -108,12 +108,28 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
                 context.Set<T>().Remove(entity);
                 await context.SaveChangesAsync();
                 return result.FillSuccessResult(entity);
-                
             }
             catch (Exception ex)
             {
                 return result.FillUnsuccessResult(ex.Message);
             }
         }
+
+        public async Task<IResult<T>> DeleteAsync(Expression<Func<T, bool>> filter)
+        {
+            try
+            {
+                using var context = new C();
+                var entity = await context.Set<T>().FindAsync(filter);
+                context.Set<T>().Remove(entity);
+                await context.SaveChangesAsync();
+                return result.FillSuccessResult(entity);
+            }
+            catch (Exception ex)
+            {
+                return result.FillUnsuccessResult(ex.Message);
+            }
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NorthwindAPI.Core.Entities.Concrete;
 using NorthwindAPI.Models.Concrete.CategoryModels;
+using NorthwindAPI.Models.Concrete.OrderDetailModels;
 using NorthwindAPI.Models.Concrete.ProductModels;
 using NorthwindAPI.Models.Concrete.SuypplierModels;
 
@@ -47,6 +48,17 @@ namespace NorthwindAPI.Profiles
             CreateMap<UpdateSupplierVM, Supplier>();
             CreateMap<Supplier, AddSupplierVM>();
             CreateMap<AddSupplierVM, Supplier>();
+            #endregion
+
+            #region OrderDetail
+            CreateMap<OrderDetail, GetOrderDetailVM>();
+            CreateMap<GetOrderDetailVM, OrderDetail>();
+            CreateMap<OrderDetail, DeleteOrderDetailVM>();
+            CreateMap<DeleteOrderDetailVM, OrderDetail>();
+            CreateMap<OrderDetail, UpdateOrderDetailVM>();
+            CreateMap<UpdateOrderDetailVM, OrderDetail>();
+            CreateMap<OrderDetail, AddOrderDetailVM>();
+            CreateMap<AddOrderDetailVM, Supplier>();
             #endregion
 
 
