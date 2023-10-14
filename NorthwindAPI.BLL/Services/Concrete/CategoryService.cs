@@ -36,5 +36,10 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             return await _categoryRepository.UpdateAsync(entity);
         }
+
+        public async Task<IResult<Category>> GetByProductId(int id)
+        {
+            return await _categoryRepository.GetByProductId(id);
+        }
     }
 }

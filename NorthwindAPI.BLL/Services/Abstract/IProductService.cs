@@ -8,5 +8,6 @@ namespace NorthwindAPI.BLL.Services.Abstract
     {
         Task<IResult<List<Product>>> GetByCategoryIdAsync(int categoryId);
         Task<IResult<List<Product>>> GetListWithCategory();
+        Task<IResult<List<Product>>> GetBySupplierIdAsync(int id);
     }
 }

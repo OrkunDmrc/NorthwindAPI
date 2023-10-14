@@ -22,17 +22,20 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<ICategoryService, CategoryService>();
+builder.Services.AddSingleton<ISupplierService, SupplierService>();
 
 
 if (settings.ORM.ToLower() == "dapper")
 {
     builder.Services.AddSingleton<IProductRepository, DapperProductRepository>();
     builder.Services.AddSingleton<ICategoryRepository, DapperCategoryRepository>();
+    builder.Services.AddSingleton<ISupplierRepository, DapperSupplierRepository>();
 }
 else if(settings.ORM.ToLower() == "ef")
 {
     builder.Services.AddSingleton<IProductRepository, EFProductRepository>();
     builder.Services.AddSingleton<ICategoryRepository, EFCategoryRepository>();
+    builder.Services.AddSingleton<ISupplierRepository, EFSupplierRepository>();
 }
 var app = builder.Build();
 

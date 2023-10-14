@@ -8,5 +8,6 @@ namespace NorthwindAPI.DAL.Repositories.Abstract
     {
         Task<IResult<List<Product>>> GetListByCategoryIdAsync(int categoryId);
         Task<IResult<List<Product>>> GetListWithCategoryAsync();
+        Task<IResult<List<Product>>> GetListBySupplierIdAsync(int id);
     }
 }

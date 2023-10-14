@@ -14,7 +14,7 @@ namespace NorthwindAPI.Core.Entities.Concrete
         public string ProductName { get; set; }
         [Column("SupplierID")]
         public int? SupplierId { get; set; }
-        [Column("CategoryID")]
+        [Column("CategoryId")]
         public int? CategoryId { get; set; }
         [Column("QuantityPerUnit")]
         public string? QuantityPerUnit { get; set; }
@@ -30,6 +30,6 @@ namespace NorthwindAPI.Core.Entities.Concrete
         public bool Discontinued { get; set; }
         public virtual Category? Category { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
-        public virtual Supply? Supplier { get; set; }
+        public virtual Supplier? Supplier { get; set; }
     }
 }

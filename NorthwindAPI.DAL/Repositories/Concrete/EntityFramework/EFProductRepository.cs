@@ -7,9 +7,14 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
     public class EFProductRepository : EFGenericRepository<Product, NorthwindContext>, IProductRepository
     {
 
-        public async Task<IResult<List<Product>>> GetListByCategoryIdAsync(int categoryId)
+        public async Task<IResult<List<Product>>> GetListByCategoryIdAsync(int id)
         {
-            return await GetListAsync(p => p.CategoryId == categoryId);
+            return await GetListAsync(p => p.CategoryId == id);
+        }
+
+        public async Task<IResult<List<Product>>> GetListBySupplierIdAsync(int id)
+        {
+            return await GetListAsync(p => p.SupplierId == id);
         }
 
         public async Task<IResult<List<Product>>> GetListWithCategoryAsync()
@@ -19,7 +24,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
                 using (var context = new NorthwindContext())
                 {
                     var result2 = (from p in context.Products
-                                   join c in context.Categories on p.CategoryId equals c.CategoryID
+                                   join c in context.Categories on p.CategoryId equals c.CategoryId
                                    select new Product
                                    {
                                        ProductId = p.ProductId,

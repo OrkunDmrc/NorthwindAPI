@@ -2,6 +2,7 @@
 using NorthwindAPI.Core.Entities.Concrete;
 using NorthwindAPI.Models.Concrete.CategoryModels;
 using NorthwindAPI.Models.Concrete.ProductModels;
+using NorthwindAPI.Models.Concrete.SuypplierModels;
 
 namespace NorthwindAPI.Profiles
 {
@@ -35,6 +36,17 @@ namespace NorthwindAPI.Profiles
             CreateMap<UpdateCategoryVM, Category>();
             CreateMap<Category, AddCategoryVM>();
             CreateMap<AddCategoryVM, Category>();
+            #endregion
+
+            #region Supplier
+            CreateMap<Supplier, GetSupplierVM>();
+            CreateMap<GetSupplierVM, Supplier>();
+            CreateMap<Supplier, DeleteSupplierVM>();
+            CreateMap<DeleteSupplierVM, Supplier>();
+            CreateMap<Supplier, UpdateSupplierVM>();
+            CreateMap<UpdateSupplierVM, Supplier>();
+            CreateMap<Supplier, AddSupplierVM>();
+            CreateMap<AddSupplierVM, Supplier>();
             #endregion
 
 

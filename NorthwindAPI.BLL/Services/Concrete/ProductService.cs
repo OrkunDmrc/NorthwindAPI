@@ -32,13 +32,17 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             return await _productRepository.DeleteAsync(id);
         }
-        public async Task<IResult<List<Product>>> GetByCategoryIdAsync(int categoryId)
+        public async Task<IResult<List<Product>>> GetByCategoryIdAsync(int id)
         {
-            return await _productRepository.GetListByCategoryIdAsync(categoryId);
+            return await _productRepository.GetListByCategoryIdAsync(id);
         }
         public async Task<IResult<List<Product>>> GetListWithCategory()
         {
             return await _productRepository.GetListWithCategoryAsync();
+        }
+        public async Task<IResult<List<Product>>> GetBySupplierIdAsync(int id)
+        {
+            return await _productRepository.GetListBySupplierIdAsync(id);
         }
     }
 }

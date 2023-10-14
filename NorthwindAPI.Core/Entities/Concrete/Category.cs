@@ -9,7 +9,7 @@ namespace NorthwindAPI.Core.Entities.Concrete
     {
         [Key]
         [Column("CategoryID")]
-        public int CategoryID { get; set; }
+        public int CategoryId { get; set; }
         [Column("CategoryName")]
         public string CategoryName { get; set; }
         [Column("Description")]

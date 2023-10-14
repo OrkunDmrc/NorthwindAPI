@@ -35,6 +35,8 @@ public partial class NorthwindContext : DbContext
 
     public virtual DbSet<Territory> Territories { get; set; }
 
+    public virtual DbSet<Supplier> Suppliers { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         using (StreamReader r = new StreamReader("appsettings.json"))
@@ -52,7 +54,7 @@ public partial class NorthwindContext : DbContext
         {
             entity.HasIndex(e => e.CategoryName, "CategoryName");
 
-            entity.Property(e => e.CategoryID).HasColumnName("CategoryID");
+            entity.Property(e => e.CategoryId).HasColumnName("CategoryId");
             entity.Property(e => e.CategoryName).HasMaxLength(15);
             entity.Property(e => e.Description).HasColumnType("ntext");
             entity.Property(e => e.Picture).HasColumnType("image");
@@ -214,7 +216,7 @@ public partial class NorthwindContext : DbContext
         {
             entity.HasIndex(e => e.CategoryId, "CategoriesProducts");
 
-            entity.HasIndex(e => e.CategoryId, "CategoryID");
+            entity.HasIndex(e => e.CategoryId, "CategoryId");
 
             entity.HasIndex(e => e.ProductName, "ProductName");
 
@@ -223,7 +225,7 @@ public partial class NorthwindContext : DbContext
             entity.HasIndex(e => e.SupplierId, "SuppliersProducts");
 
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
-            entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
+            entity.Property(e => e.CategoryId).HasColumnName("CategoryId");
             entity.Property(e => e.ProductName).HasMaxLength(40);
             entity.Property(e => e.QuantityPerUnit).HasMaxLength(20);
             entity.Property(e => e.ReorderLevel).HasDefaultValueSql("((0))");
@@ -264,7 +266,7 @@ public partial class NorthwindContext : DbContext
             entity.Property(e => e.Phone).HasMaxLength(24);
         });
 
-        modelBuilder.Entity<Supply>(entity =>
+        modelBuilder.Entity<Supplier>(entity =>
         {
             entity.HasIndex(e => e.CompanyName, "CompanyName");
 
