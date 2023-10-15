@@ -6,8 +6,8 @@ namespace NorthwindAPI.BLL.Services.Abstract
 {
     public interface IProductService : IService<Product>
     {
-        Task<IResult<List<Product>>> GetByCategoryIdAsync(int categoryId);
-        Task<IResult<List<Product>>> GetListWithCategory();
-        Task<IResult<List<Product>>> GetBySupplierIdAsync(int id);
+        Task<IResult<IEnumerable<Product>>> GetByCategoryIdAsync(int categoryId);
+        Task<IResult<IEnumerable<Product>>> GetListWithCategory();
+        Task<IResult<IEnumerable<Product>>> GetBySupplierIdAsync(int id);
     }
 }

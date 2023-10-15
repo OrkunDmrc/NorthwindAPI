@@ -17,14 +17,14 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
     public class DapperGenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
         protected IResult<T> result;
-        protected IResult<List<T>> resultList;
+        protected IResult<IEnumerable<T>> resultList;
         protected string connectionString; //= "Server=(localdb)\\MSSQLLocalDB;Database=Northwind;Trusted_Connection=true";
 
         public DapperGenericRepository()
         {
             //todo it may be dependency injection
             result = new Result<T>();
-            resultList = new Result<List<T>>();
+            resultList = new Result<IEnumerable<T>>();
             using (StreamReader r = new StreamReader("appsettings.json"))
             {
                 string json = r.ReadToEnd();
@@ -32,7 +32,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
                 connectionString = settings?.ConnectionString;
             }
         }
-        public async Task<IResult<List<T>>> GetListAsync()
+        public async Task<IResult<IEnumerable<T>>> GetAllAsync()
         {
             string tableName = GetTableName();
             string query = $"SELECT * FROM {tableName}";
@@ -78,13 +78,13 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             string query = $"DELETE FROM {tableName} WHERE {keyColumn} = {id}";
             return await ExecuteAsync(query, null);
         }
-        protected async Task<IResult<List<T>>> QueryListAsync(string query)
+        protected async Task<IResult<IEnumerable<T>>> QueryListAsync(string query)
         {
             try
             {
                 await using var connection = new SqlConnection(connectionString);
                 var result = await connection.QueryAsync<T>(query);
-                return resultList.FillSuccessResult(result?.ToList());
+                return resultList.FillSuccessResult(result);
             }
             catch (Exception ex)
             {

@@ -21,7 +21,7 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             throw new NotImplementedException();
         }
-        public Task<IResult<List<Customer>>> GetListAsync()
+        public Task<IResult<IEnumerable<Customer>>> GetAllAsync()
         {
             throw new NotImplementedException();
         }

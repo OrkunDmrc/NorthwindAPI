@@ -25,7 +25,7 @@ namespace NorthwindAPI.Controllers
         [Route("/Suppliers")]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _supplierService.GetListAsync();
+            var result = await _supplierService.GetAllAsync();
             return result.Success ? Ok(_mapper.Map<List<GetSupplierVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         [HttpGet]

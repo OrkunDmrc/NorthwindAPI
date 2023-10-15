@@ -11,31 +11,31 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
     public class EFGenericRepository<T, C> : IGenericRepository<T> where T : class, IEntity where C : DbContext, new()
     {
         protected IResult<T> result;
-        protected IResult<List<T>> resultList;
+        protected IResult<IEnumerable<T>> resultList;
         public EFGenericRepository()
         {
             //todo it may be dependency injection
             result = new Result<T>();
-            resultList = new Result<List<T>>();
+            resultList = new Result<IEnumerable<T>>();
         }
-        public async Task<IResult<List<T>>> GetListAsync()
+        public async Task<IResult<IEnumerable<T>>> GetAllAsync()
         {
             try
             {
                 using var context = new C();
-                return resultList.FillSuccessResult(context.Set<T>().ToList());
+                return resultList.FillSuccessResult(context.Set<T>().AsEnumerable());
             }
             catch (Exception ex)
             {
                 return resultList.FillUnsuccessResult(ex.Message);
             }
         }
-        public async Task<IResult<List<T>>> GetListAsync(Expression<Func<T, bool>> filter)
+        public async Task<IResult<IEnumerable<T>>> GetAllAsync(Expression<Func<T, bool>> filter)
         {
             try
             {
                 using var context = new C();
-                return resultList.FillSuccessResult(context.Set<T>().Where(filter).ToList());
+                return resultList.FillSuccessResult(context.Set<T>().Where(filter).AsEnumerable());
             }
             catch (Exception ex)
             {

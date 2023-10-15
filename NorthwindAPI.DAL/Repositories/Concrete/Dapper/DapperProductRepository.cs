@@ -8,19 +8,19 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
 {
     public class DapperProductRepository : DapperGenericRepository<Product>, IProductRepository
     {
-        public async Task<IResult<List<Product>>> GetListByCategoryIdAsync(int id)
+        public async Task<IResult<IEnumerable<Product>>> GetAllByCategoryIdAsync(int id)
         {
             string query = $"SELECT * FROM {GetTableName()} where CategoryId = {id}";
             return await QueryListAsync(query);
         }
 
-        public async Task<IResult<List<Product>>> GetListBySupplierIdAsync(int id)
+        public async Task<IResult<IEnumerable<Product>>> GetAllBySupplierIdAsync(int id)
         {
             string query = $"SELECT * FROM {GetTableName()} where SupplierId = {id}";
             return await QueryListAsync(query);
         }
 
-        public async Task<IResult<List<Product>>> GetListWithCategoryAsync()
+        public async Task<IResult<IEnumerable<Product>>> GetAllWithCategoryAsync()
         {
             string query = $"SELECT {GetColumns(tableAs: "p")}, {GetColumns(entityType: typeof(Category), tableAs: "c")} FROM {GetTableName(tableAs: "p")}, {GetTableName(entityType: typeof(Category), tableAs: "c")} where c.CategoryId = p.CategoryId";
             try

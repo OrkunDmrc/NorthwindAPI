@@ -12,9 +12,9 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             _productRepository = productRepository;
         }
-        public async Task<IResult<List<Product>>> GetListAsync()
+        public async Task<IResult<IEnumerable<Product>>> GetAllAsync()
         {
-            return await _productRepository.GetListAsync();
+            return await _productRepository.GetAllAsync();
         }
         public async Task<IResult<Product>> InsertAsync(Product product)
         {
@@ -32,17 +32,17 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             return await _productRepository.DeleteAsync(id);
         }
-        public async Task<IResult<List<Product>>> GetByCategoryIdAsync(int id)
+        public async Task<IResult<IEnumerable<Product>>> GetByCategoryIdAsync(int id)
         {
-            return await _productRepository.GetListByCategoryIdAsync(id);
+            return await _productRepository.GetAllByCategoryIdAsync(id);
         }
-        public async Task<IResult<List<Product>>> GetListWithCategory()
+        public async Task<IResult<IEnumerable<Product>>> GetListWithCategory()
         {
-            return await _productRepository.GetListWithCategoryAsync();
+            return await _productRepository.GetAllWithCategoryAsync();
         }
-        public async Task<IResult<List<Product>>> GetBySupplierIdAsync(int id)
+        public async Task<IResult<IEnumerable<Product>>> GetBySupplierIdAsync(int id)
         {
-            return await _productRepository.GetListBySupplierIdAsync(id);
+            return await _productRepository.GetAllBySupplierIdAsync(id);
         }
     }
 }

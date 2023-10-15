@@ -6,6 +6,8 @@ using NorthwindAPI.Models.Concrete.OrderDetailModels;
 using NorthwindAPI.Models.Concrete.ProductModels;
 using NorthwindAPI.Models.Concrete.SuypplierModels;
 using NorthwindAPI.Models.Concrete.CustomerModels;
+using NorthwindAPI.Models.Concrete.ShipperModels;
+using NorthwindAPI.Models.Concrete.EmployeModels;
 
 namespace NorthwindAPI.Profiles
 {
@@ -63,6 +65,17 @@ namespace NorthwindAPI.Profiles
             CreateMap<AddSupplierVM, Supplier>();
             #endregion
 
+            #region Shipper
+            CreateMap<Shipper, GetShipperVM>();
+            CreateMap<GetShipperVM, Shipper>();
+            CreateMap<Shipper, DeleteShipperVM>();
+            CreateMap<DeleteShipperVM, Shipper>();
+            CreateMap<Shipper, UpdateShipperVM>();
+            CreateMap<UpdateShipperVM, Shipper>();
+            CreateMap<Shipper, AddShipperVM>();
+            CreateMap<AddShipperVM, Shipper>();
+            #endregion
+
             #region Order
             CreateMap<Order, GetOrderVM>();
             CreateMap<GetOrderVM, Order>();
@@ -85,6 +98,16 @@ namespace NorthwindAPI.Profiles
             CreateMap<AddOrderDetailVM, OrderDetail>();
             #endregion
 
+            #region Employee
+            CreateMap<Employee, GetEmployeeVM>();
+            CreateMap<GetEmployeeVM, Employee>();
+            CreateMap<Employee, DeleteEmployeeVM>();
+            CreateMap<DeleteEmployeeVM, Employee>();
+            CreateMap<Employee, UpdateEmployeeVM>();
+            CreateMap<UpdateEmployeeVM, Employee>();
+            CreateMap<Employee, AddEmployeeVM>();
+            CreateMap<AddEmployeeVM, Employee>();
+            #endregion
 
         }
     }

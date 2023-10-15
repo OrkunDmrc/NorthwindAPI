@@ -12,9 +12,9 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             _orderDetailRepository = orderDetailRepository;
         }
-        public async Task<IResult<List<OrderDetail>>> GetListAsync()
+        public async Task<IResult<IEnumerable<OrderDetail>>> GetAllAsync()
         {
-            return await _orderDetailRepository.GetListAsync();
+            return await _orderDetailRepository.GetAllAsync();
         }
         public async Task<IResult<OrderDetail>> InsertAsync(OrderDetail entity)
         {
@@ -32,17 +32,21 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             return await _orderDetailRepository.DeleteAsync(id);
         }
-        public async Task<IResult<List<OrderDetail>>> GetListByProductId(int id)
+        public async Task<IResult<IEnumerable<OrderDetail>>> GetAllByProductId(int id)
         {
-            return await _orderDetailRepository.GetListByProductId(id);
+            return await _orderDetailRepository.GetAllByProductId(id);
         }
-        public async Task<IResult<List<OrderDetail>>> GetListByOrderIdProductIdAsync(int orderId, int productId)
+        public async Task<IResult<IEnumerable<OrderDetail>>> GetAllByOrderIdProductIdAsync(int orderId, int productId)
         {
             return await _orderDetailRepository.GetListByOrderIdProductIdAsync(orderId, productId);
         }
         public async Task<IResult<OrderDetail>> DeleteByOrderIdProductIdAsync(int orderId, int productId)
         {
             return await _orderDetailRepository.DeleteByOrderIdProductIdAsync(orderId, productId);
+        }
+        public async Task<IResult<IEnumerable<OrderDetail>>> GetAllByOrderId(int id)
+        {
+            return await _orderDetailRepository.GetAllByOrderId(id);
         }
     }
 }

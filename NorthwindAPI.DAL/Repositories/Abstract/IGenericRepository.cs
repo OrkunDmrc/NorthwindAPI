@@ -6,7 +6,7 @@ namespace NorthwindAPI.DAL.Repository.Abstract
 {
     public interface IGenericRepository<T> where T : class, IEntity
     {
-        Task<IResult<List<T>>> GetListAsync();
+        Task<IResult<IEnumerable<T>>> GetAllAsync();
 
         Task<IResult<T>> GetAsync(int id);
 

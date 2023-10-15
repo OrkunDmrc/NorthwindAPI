@@ -22,14 +22,14 @@ namespace NorthwindAPI.Controllers
         [Route("/OrderDetails")]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _orderDetailService.GetListAsync();
+            var result = await _orderDetailService.GetAllAsync();
             return result.Success ? Ok(_mapper.Map<List<GetOrderDetailVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         [HttpGet]
         [Route("/OrderDetails/{orderId}&{productId}")]
         public async Task<IActionResult> Get(int orderId, int productId)
         {
-            var result = await _orderDetailService.GetListByOrderIdProductIdAsync(orderId, productId);
+            var result = await _orderDetailService.GetAllByOrderIdProductIdAsync(orderId, productId);
             return result.Success ? Ok(_mapper.Map<List<GetOrderDetailVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         /*[HttpPost]

@@ -22,9 +22,9 @@ namespace NorthwindAPI.BLL.Services.Concrete
             return await _categoryRepository.GetAsync(id);
         }
 
-        public async Task<IResult<List<Category>>> GetListAsync()
+        public async Task<IResult<IEnumerable<Category>>> GetAllAsync()
         {
-            return await _categoryRepository.GetListAsync();
+            return await _categoryRepository.GetAllAsync();
         }
 
         public async Task<IResult<Category>> InsertAsync(Category entity)

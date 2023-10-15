@@ -22,9 +22,9 @@ namespace NorthwindAPI.BLL.Services.Concrete
             return await _supplierRepository.GetAsync(id);
         }
 
-        public async Task<IResult<List<Supplier>>> GetListAsync()
+        public async Task<IResult<IEnumerable<Supplier>>> GetAllAsync()
         {
-            return await _supplierRepository.GetListAsync();
+            return await _supplierRepository.GetAllAsync();
         }
 
         public async Task<IResult<Supplier>> InsertAsync(Supplier entity)

@@ -6,8 +6,8 @@ namespace NorthwindAPI.DAL.Repositories.Abstract
 {
     public interface IProductRepository : IGenericRepository<Product>
     {
-        Task<IResult<List<Product>>> GetListByCategoryIdAsync(int categoryId);
-        Task<IResult<List<Product>>> GetListWithCategoryAsync();
-        Task<IResult<List<Product>>> GetListBySupplierIdAsync(int id);
+        Task<IResult<IEnumerable<Product>>> GetAllByCategoryIdAsync(int categoryId);
+        Task<IResult<IEnumerable<Product>>> GetAllWithCategoryAsync();
+        Task<IResult<IEnumerable<Product>>> GetAllBySupplierIdAsync(int id);
     }
 }

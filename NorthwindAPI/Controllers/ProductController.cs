@@ -30,7 +30,7 @@ namespace NorthwindAPI.Controllers
         [Route("/Products")]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _productService.GetListAsync();
+            var result = await _productService.GetAllAsync();
             return result.Success ? Ok (_mapper.Map<List<GetProductVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         [HttpGet]
@@ -77,20 +77,20 @@ namespace NorthwindAPI.Controllers
         [Route("/Products/{id}/OrderDetails")]
         public async Task<IActionResult> GetOrderDetailByProductId(int id)
         {
-            var result = await _orderDetailService.GetListByProductId(id);
+            var result = await _orderDetailService.GetAllByProductId(id);
             return result.Success ? Ok(_mapper.Map<List<GetOrderDetailVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         /*[HttpGet]
         //category controller 
         public async Task<IActionResult> GetByCategory(int categoryId)
         {
-            var result = await _productService.GetByCategoryIdAsync(categoryId);
+            var result = await _shipperService.GetByCategoryIdAsync(categoryId);
             return result.Success ? Ok(_mapper.Map<List<GetProductByCategoryIdVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         [HttpGet]
         public async Task<IActionResult> GetListWithCategory()
         {
-            var result = await _productService.GetListWithCategory();
+            var result = await _shipperService.GetListWithCategory();
             return result.Success ? Ok(_mapper.Map<List<GetProductWithCategoryVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }*/
     }

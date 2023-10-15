@@ -7,17 +7,17 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
     public class EFProductRepository : EFGenericRepository<Product, NorthwindContext>, IProductRepository
     {
 
-        public async Task<IResult<List<Product>>> GetListByCategoryIdAsync(int id)
+        public async Task<IResult<IEnumerable<Product>>> GetAllByCategoryIdAsync(int id)
         {
-            return await GetListAsync(p => p.CategoryId == id);
+            return await GetAllAsync(p => p.CategoryId == id);
         }
 
-        public async Task<IResult<List<Product>>> GetListBySupplierIdAsync(int id)
+        public async Task<IResult<IEnumerable<Product>>> GetAllBySupplierIdAsync(int id)
         {
-            return await GetListAsync(p => p.SupplierId == id);
+            return await GetAllAsync(p => p.SupplierId == id);
         }
 
-        public async Task<IResult<List<Product>>> GetListWithCategoryAsync()
+        public async Task<IResult<IEnumerable<Product>>> GetAllWithCategoryAsync()
         {
             try
             {

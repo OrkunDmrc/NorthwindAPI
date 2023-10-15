@@ -17,14 +17,19 @@ namespace NorthwindAPI.BLL.Services.Concrete
             return await _orderRepository.DeleteAsync(id);
         }
 
+        public async Task<IResult<IEnumerable<Order>>> GetAllByShipViaAsync(int id)
+        {
+            return await _orderRepository.GetAllByShipViaAsync(id);
+        }
+
         public async Task<IResult<Order>> GetAsync(int id)
         {
             return await _orderRepository.GetAsync(id);
         }
 
-        public async Task<IResult<List<Order>>> GetListAsync()
+        public async Task<IResult<IEnumerable<Order>>> GetAllAsync()
         {
-            return await _orderRepository.GetListAsync();
+            return await _orderRepository.GetAllAsync();
         }
 
         public async Task<IResult<Order>> InsertAsync(Order entity)

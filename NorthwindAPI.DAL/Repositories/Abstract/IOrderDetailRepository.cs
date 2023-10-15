@@ -6,8 +6,9 @@ namespace NorthwindAPI.DAL.Repositories.Abstract
 {
     public interface IOrderDetailRepository : IGenericRepository<OrderDetail>
     {
-        Task<IResult<List<OrderDetail>>> GetListByProductId(int id);
-        Task<IResult<List<OrderDetail>>> GetListByOrderIdProductIdAsync(int orderId, int productId);
+        Task<IResult<IEnumerable<OrderDetail>>> GetAllByProductId(int id);
+        Task<IResult<IEnumerable<OrderDetail>>> GetListByOrderIdProductIdAsync(int orderId, int productId);
         Task<IResult<OrderDetail>> DeleteByOrderIdProductIdAsync(int orderId, int productId);
+        Task<IResult<IEnumerable<OrderDetail>>> GetAllByOrderId(int id);
     }
 }

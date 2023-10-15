@@ -5,7 +5,7 @@ namespace NorthwindAPI.BLL.Services.Abstract
 {
     public interface IService<T> where T : class, IEntity
     {
-        Task<IResult<List<T>>> GetListAsync();
+        Task<IResult<IEnumerable<T>>> GetAllAsync();
         Task<IResult<T>> GetAsync(int id);
         Task<IResult<T>> InsertAsync(T entity);
         Task<IResult<T>> UpdateAsync(T entity);

@@ -6,18 +6,21 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
 {
     public class EFOrderDetailRepository : EFGenericRepository<OrderDetail, NorthwindContext>, IOrderDetailRepository
     {
-        public async Task<IResult<List<OrderDetail>>> GetListByProductId(int id)
+        public async Task<IResult<IEnumerable<OrderDetail>>> GetAllByProductId(int id)
         {
-            return await GetListAsync(od => od.ProductId == id);
+            return await GetAllAsync(od => od.ProductId == id);
         }
-        public async Task<IResult<List<OrderDetail>>> GetListByOrderIdProductIdAsync(int orderId, int productId)
+        public async Task<IResult<IEnumerable<OrderDetail>>> GetListByOrderIdProductIdAsync(int orderId, int productId)
         {
-            return await GetListAsync(od => od.OrderId == orderId && od.ProductId == productId);
+            return await GetAllAsync(od => od.OrderId == orderId && od.ProductId == productId);
         }
         public async Task<IResult<OrderDetail>> DeleteByOrderIdProductIdAsync(int orderId, int productId)
         {
             return await DeleteAsync(od => od.OrderId == orderId && od.ProductId == productId);
         }
-
+        public async Task<IResult<IEnumerable<OrderDetail>>> GetAllByOrderId(int id)
+        {
+            return await GetAllAsync(od => od.OrderId == id);
+        }
     }
 }

@@ -25,8 +25,8 @@ namespace NorthwindAPI.Controllers
         [Route("/Categories")]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _categoryService.GetListAsync();
-            return result.Success ? Ok(_mapper.Map<List<GetCategoryVM>>(result.Object)) : BadRequest(result.ErrorMessage);
+            var result = await _categoryService.GetAllAsync();
+            return result.Success ? Ok(_mapper.Map<IEnumerable<GetCategoryVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         [HttpGet]
         [Route("/Categories/{id}")]
