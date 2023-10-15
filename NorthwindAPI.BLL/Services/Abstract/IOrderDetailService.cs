@@ -3,7 +3,7 @@ using NorthwindAPI.Core.Results.Abstract;
 
 namespace NorthwindAPI.BLL.Services.Abstract
 {
-    public interface IOrderDetailService : IService<OrderDetail>
+    public interface IOrderDetailService : IService<OrderDetail, int>
     {
         Task<IResult<IEnumerable<OrderDetail>>> GetAllByProductId(int id);
         Task<IResult<IEnumerable<OrderDetail>>> GetAllByOrderIdProductIdAsync(int orderId, int productId);

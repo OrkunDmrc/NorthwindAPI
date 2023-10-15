@@ -12,33 +12,34 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             _customerRepository = customerRepository;
         }
-        public Task<IResult<Customer>> DeleteAsync(int id)
+        public async Task<IResult<Customer>> DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            return await _customerRepository.DeleteAsync(id);
         }
 
-        public Task<IResult<Customer>> GetAsync(int id)
+        public async Task<IResult<Customer>> GetAsync(string id)
         {
-            throw new NotImplementedException();
-        }
-        public Task<IResult<IEnumerable<Customer>>> GetAllAsync()
-        {
-            throw new NotImplementedException();
+            return await _customerRepository.GetAsync(id);
         }
 
-        public Task<IResult<Customer>> InsertAsync(Customer entity)
+        public async Task<IResult<IEnumerable<Customer>>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _customerRepository.GetAllAsync();
         }
 
-        public Task<IResult<Customer>> UpdateAsync(Customer entity)
+        public async Task<IResult<Customer>> InsertAsync(Customer entity)
         {
-            throw new NotImplementedException();
+            return await _customerRepository.InsertAsync(entity);
+        }
+
+        public async Task<IResult<Customer>> UpdateAsync(Customer entity)
+        {
+            return await _customerRepository.UpdateAsync(entity);
         }
 
         public async Task<IResult<Customer>> GetByOrderId(int id)
         {
-            return await _customerRepository.GetByOrderId(id);
+            return await _customerRepository.GetByOrderIdAsync(id);
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
 {
-    public class DapperEmployeeRepository : DapperGenericRepository<Employee>, IEmployeeRepository
+    public class DapperEmployeeRepository : DapperGenericRepository<Employee, int>, IEmployeeRepository
     {
         public async Task<IResult<Employee>> GetByOrderId(int id)
         {

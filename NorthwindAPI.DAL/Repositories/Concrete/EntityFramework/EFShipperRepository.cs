@@ -5,7 +5,7 @@ using NorthwindAPI.DAL.Repositories.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
 {
-    public class EFShipperRepository : EFGenericRepository<Shipper, NorthwindContext>, IShipperRepository
+    public class EFShipperRepository : EFGenericRepository<Shipper, int, NorthwindContext>, IShipperRepository
     {
         public async Task<IResult<Shipper>> GetAllByOrderId(int id)
         {

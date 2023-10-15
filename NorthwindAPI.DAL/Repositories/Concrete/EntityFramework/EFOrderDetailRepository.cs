@@ -4,7 +4,7 @@ using NorthwindAPI.DAL.Repositories.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
 {
-    public class EFOrderDetailRepository : EFGenericRepository<OrderDetail, NorthwindContext>, IOrderDetailRepository
+    public class EFOrderDetailRepository : EFGenericRepository<OrderDetail, int, NorthwindContext>, IOrderDetailRepository
     {
         public async Task<IResult<IEnumerable<OrderDetail>>> GetAllByProductId(int id)
         {

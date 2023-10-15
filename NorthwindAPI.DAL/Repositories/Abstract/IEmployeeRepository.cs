@@ -4,7 +4,7 @@ using NorthwindAPI.DAL.Repository.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Abstract
 {
-    public interface IEmployeeRepository : IGenericRepository<Employee>
+    public interface IEmployeeRepository : IGenericRepository<Employee, int>
     {
         Task<IResult<Employee>> GetByOrderId(int id);
     }

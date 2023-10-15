@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
 {
-    public class DapperShipperRepository : DapperGenericRepository<Shipper>, IShipperRepository
+    public class DapperShipperRepository : DapperGenericRepository<Shipper, int>, IShipperRepository
     {
         public async Task<IResult<Shipper>> GetAllByOrderId(int id)
         {

@@ -5,7 +5,7 @@ using NorthwindAPI.DAL.Repositories.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
 {
-    public class EFEmployeeRepository : EFGenericRepository<Employee, NorthwindContext>, IEmployeeRepository
+    public class EFEmployeeRepository : EFGenericRepository<Employee, int, NorthwindContext>, IEmployeeRepository
     {
         public async Task<IResult<Employee>> GetByOrderId(int id)
         {

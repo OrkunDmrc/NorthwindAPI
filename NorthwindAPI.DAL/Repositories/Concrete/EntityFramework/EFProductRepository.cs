@@ -4,7 +4,7 @@ using NorthwindAPI.DAL.Repositories.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
 {
-    public class EFProductRepository : EFGenericRepository<Product, NorthwindContext>, IProductRepository
+    public class EFProductRepository : EFGenericRepository<Product, int, NorthwindContext>, IProductRepository
     {
 
         public async Task<IResult<IEnumerable<Product>>> GetAllByCategoryIdAsync(int id)

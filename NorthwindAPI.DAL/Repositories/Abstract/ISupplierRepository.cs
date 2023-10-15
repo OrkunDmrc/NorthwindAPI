@@ -4,7 +4,7 @@ using NorthwindAPI.DAL.Repository.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Abstract
 {
-    public interface ISupplierRepository : IGenericRepository<Supplier>
+    public interface ISupplierRepository : IGenericRepository<Supplier, int>
     {
         Task<IResult<Supplier>> GetByProductId(int id);
     }

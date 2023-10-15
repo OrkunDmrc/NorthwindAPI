@@ -4,17 +4,17 @@ using System.Linq.Expressions;
 
 namespace NorthwindAPI.DAL.Repository.Abstract
 {
-    public interface IGenericRepository<T> where T : class, IEntity
+    public interface IGenericRepository<T, KeyT> where T : class, IEntity
     {
         Task<IResult<IEnumerable<T>>> GetAllAsync();
 
-        Task<IResult<T>> GetAsync(int id);
+        Task<IResult<T>> GetAsync(KeyT id);
 
         Task<IResult<T>> InsertAsync(T entity);
 
         Task<IResult<T>> UpdateAsync(T entity);
 
-        Task<IResult<T>> DeleteAsync(int id);
+        Task<IResult<T>> DeleteAsync(KeyT id);
 
     }
 }

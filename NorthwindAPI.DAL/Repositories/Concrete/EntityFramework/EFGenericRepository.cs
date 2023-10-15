@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
 {
-    public class EFGenericRepository<T, C> : IGenericRepository<T> where T : class, IEntity where C : DbContext, new()
+    public class EFGenericRepository<T, KeyT, C> : IGenericRepository<T, KeyT> where T : class, IEntity where C : DbContext, new()
     {
         protected IResult<T> result;
         protected IResult<IEnumerable<T>> resultList;
@@ -43,7 +43,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
             }
             return resultList;
         }
-        public async Task<IResult<T>> GetAsync(int id)
+        public async Task<IResult<T>> GetAsync(KeyT id)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
             }
         }
 
-        public async Task<IResult<T>> DeleteAsync(int id)
+        public async Task<IResult<T>> DeleteAsync(KeyT id)
         {
             try
             {

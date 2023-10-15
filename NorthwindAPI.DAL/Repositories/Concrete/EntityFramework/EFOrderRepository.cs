@@ -4,7 +4,7 @@ using NorthwindAPI.DAL.Repositories.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
 {
-    public class EFOrderRepository : EFGenericRepository<Order, NorthwindContext>, IOrderRepository
+    public class EFOrderRepository : EFGenericRepository<Order, int, NorthwindContext>, IOrderRepository
     {
         public async Task<IResult<IEnumerable<Order>>> GetAllByShipViaAsync(int id)
         {

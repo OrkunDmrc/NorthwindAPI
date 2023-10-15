@@ -8,13 +8,12 @@ using NorthwindAPI.DAL.Repository.Abstract;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlClient;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
 {
-    public class DapperGenericRepository<T> : IGenericRepository<T> where T : class, IEntity
+    public class DapperGenericRepository<T, KeyT> : IGenericRepository<T, KeyT> where T : class, IEntity
     {
         protected IResult<T> result;
         protected IResult<IEnumerable<T>> resultList;
@@ -38,7 +37,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             string query = $"SELECT * FROM {tableName}";
             return await QueryListAsync(query);
         }
-        public async Task<IResult<T>> GetAsync(int id)
+        public async Task<IResult<T>> GetAsync(KeyT id)
         {
             string tableName = GetTableName();
             string keyColumn = GetKeyColumnName();
@@ -71,7 +70,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             query.Append($" WHERE {keyColumn} = @{keyProperty}");
             return await ExecuteAsync(query.ToString(), entity);
         }
-        public async Task<IResult<T>> DeleteAsync(int id)
+        public async Task<IResult<T>> DeleteAsync(KeyT id)
         {
             string tableName = GetTableName();
             string keyColumn = GetKeyColumnName();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NorthwindAPI.BLL.Services.Abstract
 {
-    public interface IShipperService : IService<Shipper>
+    public interface IShipperService : IService<Shipper, int>
     {
         Task<IResult<Shipper>> GetByOrderId(int id);
     }

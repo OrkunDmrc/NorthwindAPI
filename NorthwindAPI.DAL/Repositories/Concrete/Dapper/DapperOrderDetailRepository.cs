@@ -4,7 +4,7 @@ using NorthwindAPI.DAL.Repositories.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
 {
-    public class DapperOrderDetailRepository : DapperGenericRepository<OrderDetail>, IOrderDetailRepository
+    public class DapperOrderDetailRepository : DapperGenericRepository<OrderDetail, int>, IOrderDetailRepository
     {
         public async Task<IResult<IEnumerable<OrderDetail>>> GetAllByProductId(int id)
         {

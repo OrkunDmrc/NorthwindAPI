@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NorthwindAPI.DAL.Repositories.Abstract
 {
-    public interface IShipperRepository : IGenericRepository<Shipper>
+    public interface IShipperRepository : IGenericRepository<Shipper, int>
     {
         Task<IResult<Shipper>> GetAllByOrderId(int id);
     }

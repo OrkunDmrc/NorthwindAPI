@@ -4,8 +4,8 @@ using NorthwindAPI.DAL.Repository.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Abstract
 {
-    public interface ICustomerRepository : IGenericRepository<Customer>
+    public interface ICustomerRepository : IGenericRepository<Customer, string>
     {
-        Task<IResult<Customer>> GetByOrderId(int id);
+        Task<IResult<Customer>> GetByOrderIdAsync(int id);
     }
 }

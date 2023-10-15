@@ -4,7 +4,7 @@ using NorthwindAPI.DAL.Repositories.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
 {
-    public class DapperOrderRepository : DapperGenericRepository<Order>, IOrderRepository
+    public class DapperOrderRepository : DapperGenericRepository<Order, int>, IOrderRepository
     {
         public async Task<IResult<IEnumerable<Order>>> GetAllByShipViaAsync(int id)
         {

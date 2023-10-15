@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
 {
-    public class DapperCategoryRepository : DapperGenericRepository<Category>, ICategoryRepository
+    public class DapperCategoryRepository : DapperGenericRepository<Category, int>, ICategoryRepository
     {
         public async Task<IResult<Category>> GetByProductId(int id)
         {

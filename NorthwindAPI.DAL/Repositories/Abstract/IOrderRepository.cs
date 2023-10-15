@@ -4,7 +4,7 @@ using NorthwindAPI.DAL.Repository.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Abstract
 {
-    public interface IOrderRepository : IGenericRepository<Order>
+    public interface IOrderRepository : IGenericRepository<Order, int>
     {
         Task<IResult<IEnumerable<Order>>> GetAllByShipViaAsync(int id);
     }

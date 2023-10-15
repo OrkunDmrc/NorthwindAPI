@@ -6,22 +6,12 @@ using System.Data.SqlClient;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
 {
-    public class DapperSupplierRepository : DapperGenericRepository<Supplier>, ISupplierRepository
+    public class DapperSupplierRepository : DapperGenericRepository<Supplier, int>, ISupplierRepository
     {
         public async Task<IResult<Supplier>> GetByProductId(int id)
         {
             string query = $"SELECT {GetColumns(tableAs: "s")} FROM {GetTableName(tableAs: "s")}, {GetTableName(entityType: typeof(Product), tableAs: "p")}  where p.ProductID = {id} and s.SupplierID = p.CategoryID";
             return await QueryAsync(query);
-            /*try
-            {
-                await using var connection = new SqlConnection(connectionString);
-                var queryResult = await connection.QuerySingleOrDefaultAsync<Supplier>(query);
-                return result.FillSuccessResult(queryResult);
-            }
-            catch (Exception ex)
-            {
-                return result.FillUnsuccessResult(ex.Message);
-            }*/
         }
     }
 }

@@ -4,7 +4,7 @@ using NorthwindAPI.Core.Results.Abstract;
 
 namespace NorthwindAPI.BLL.Services.Abstract
 {
-    public interface IProductService : IService<Product>
+    public interface IProductService : IService<Product, int>
     {
         Task<IResult<IEnumerable<Product>>> GetByCategoryIdAsync(int categoryId);
         Task<IResult<IEnumerable<Product>>> GetListWithCategory();

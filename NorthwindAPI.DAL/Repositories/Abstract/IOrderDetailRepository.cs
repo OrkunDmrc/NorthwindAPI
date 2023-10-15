@@ -4,7 +4,7 @@ using NorthwindAPI.DAL.Repository.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Abstract
 {
-    public interface IOrderDetailRepository : IGenericRepository<OrderDetail>
+    public interface IOrderDetailRepository : IGenericRepository<OrderDetail, int>
     {
         Task<IResult<IEnumerable<OrderDetail>>> GetAllByProductId(int id);
         Task<IResult<IEnumerable<OrderDetail>>> GetListByOrderIdProductIdAsync(int orderId, int productId);
