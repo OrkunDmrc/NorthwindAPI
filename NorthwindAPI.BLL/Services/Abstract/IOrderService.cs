@@ -6,5 +6,6 @@ namespace NorthwindAPI.BLL.Services.Abstract
     public interface IOrderService : IService<Order, int>
     {
         Task<IResult<IEnumerable<Order>>> GetAllByShipViaAsync(int id);
+        Task<IResult<IEnumerable<Order>>> GetAllByCustomerIdAsync(string id);
     }
 }

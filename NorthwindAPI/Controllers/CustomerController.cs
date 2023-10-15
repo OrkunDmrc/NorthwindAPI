@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NorthwindAPI.BLL.Services.Abstract;
 using NorthwindAPI.Core.Entities.Concrete;
 using NorthwindAPI.Models.Concrete.CustomerModels;
+using NorthwindAPI.Models.Concrete.OrderModels;
 
 namespace NorthwindAPI.Controllers
 {
@@ -12,11 +13,13 @@ namespace NorthwindAPI.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ICustomerService _customerService;
+        private readonly IOrderService _orderService;
 
-        public CustomerController(IMapper mapper, ICustomerService customerService)
+        public CustomerController(IMapper mapper, ICustomerService customerService, IOrderService orderService)
         {
             _mapper = mapper;
             _customerService = customerService;
+            _orderService = orderService;
         }
         [HttpGet]
         [Route("/Customers")]
@@ -50,6 +53,13 @@ namespace NorthwindAPI.Controllers
         {
             var result = await _customerService.DeleteAsync(id);
             return result.Success ? Ok(_mapper.Map<DeleteCustomerVM>(result.Object)) : BadRequest(result.ErrorMessage);
+        }
+        [HttpGet]
+        [Route("/Customers/{id}/Orders")]
+        public async Task<IActionResult> GetOrdersByCustomerIdAsync(string id)
+        {
+            var result = await _orderService.GetAllByCustomerIdAsync(id);
+            return result.Success ? Ok(_mapper.Map<IEnumerable<GetOrderVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }
     }
 }

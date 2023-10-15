@@ -7,5 +7,6 @@ namespace NorthwindAPI.DAL.Repositories.Abstract
     public interface IOrderRepository : IGenericRepository<Order, int>
     {
         Task<IResult<IEnumerable<Order>>> GetAllByShipViaAsync(int id);
+        Task<IResult<IEnumerable<Order>>> GetAllByCustomerIdAsync(string id);
     }
 }

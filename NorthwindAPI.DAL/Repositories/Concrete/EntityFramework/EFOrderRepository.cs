@@ -6,6 +6,11 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
 {
     public class EFOrderRepository : EFGenericRepository<Order, int, NorthwindContext>, IOrderRepository
     {
+        public async Task<IResult<IEnumerable<Order>>> GetAllByCustomerIdAsync(string id)
+        {
+            return await GetAllAsync(o => o.CustomerId == id);
+        }
+
         public async Task<IResult<IEnumerable<Order>>> GetAllByShipViaAsync(int id)
         {
             return await GetAllAsync(o => o.ShipVia == id);

@@ -41,5 +41,10 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             return await _orderRepository.UpdateAsync(entity);
         }
+
+        public async Task<IResult<IEnumerable<Order>>> GetAllByCustomerIdAsync(string id)
+        {
+            return await _orderRepository.GetAllByCustomerIdAsync(id);
+        }
     }
 }
