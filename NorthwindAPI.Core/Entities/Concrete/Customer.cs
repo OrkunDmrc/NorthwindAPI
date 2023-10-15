@@ -9,9 +9,7 @@ namespace NorthwindAPI.Core.Entities.Concrete
     {
         [Key]
         [Column("CustomerID")]
-        public int CustomerId { get; set; }
-        [Column("CustomerName")]
-        public string CustomerName { get; set; }
+        public string? CustomerId { get; set; }
         [Column("CompanyName")]
         public string CompanyName { get; set; } = null!;
         [Column("ContactName")]

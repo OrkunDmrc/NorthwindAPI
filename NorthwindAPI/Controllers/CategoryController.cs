@@ -11,9 +11,10 @@ namespace NorthwindAPI.Controllers
     [Route("[controller]")]
     public class CategoryController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
-        private readonly IMapper _mapper;
+        
         public CategoryController(IMapper mapper, ICategoryService categoryService, IProductService productService)
         {
             _mapper = mapper;
@@ -35,9 +36,9 @@ namespace NorthwindAPI.Controllers
             return result.Success ? Ok(_mapper.Map<GetCategoryVM>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         [HttpPost]
-        public async Task<IActionResult> Post(AddCategoryVM categoryModel)
+        public async Task<IActionResult> Post(AddCategoryVM model)
         {
-            var result = await _categoryService.InsertAsync(_mapper.Map<Category>(categoryModel));
+            var result = await _categoryService.InsertAsync(_mapper.Map<Category>(model));
             return result.Success ? Ok(_mapper.Map<AddCategoryVM>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         [HttpPut]

@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using NorthwindAPI.Core.Entities.Concrete;
 using NorthwindAPI.Models.Concrete.CategoryModels;
+using NorthwindAPI.Models.Concrete.OrderModels;
 using NorthwindAPI.Models.Concrete.OrderDetailModels;
 using NorthwindAPI.Models.Concrete.ProductModels;
 using NorthwindAPI.Models.Concrete.SuypplierModels;
+using NorthwindAPI.Models.Concrete.CustomerModels;
 
 namespace NorthwindAPI.Profiles
 {
@@ -39,6 +41,17 @@ namespace NorthwindAPI.Profiles
             CreateMap<AddCategoryVM, Category>();
             #endregion
 
+            #region Customer
+            CreateMap<Customer, GetCustomerVM>();
+            CreateMap<GetCustomerVM, Customer>();
+            CreateMap<Customer, DeleteCustomerVM>();
+            CreateMap<DeleteCustomerVM, Customer>();
+            CreateMap<Customer, UpdateCustomerVM>();
+            CreateMap<UpdateCustomerVM, Customer>();
+            CreateMap<Customer, AddCustomerVM>();
+            CreateMap<AddCustomerVM, Customer>();
+            #endregion
+
             #region Supplier
             CreateMap<Supplier, GetSupplierVM>();
             CreateMap<GetSupplierVM, Supplier>();
@@ -50,6 +63,17 @@ namespace NorthwindAPI.Profiles
             CreateMap<AddSupplierVM, Supplier>();
             #endregion
 
+            #region Order
+            CreateMap<Order, GetOrderVM>();
+            CreateMap<GetOrderVM, Order>();
+            CreateMap<Order, DeleteOrderVM>();
+            CreateMap<DeleteOrderVM, Order>();
+            CreateMap<Order, UpdateOrderVM>();
+            CreateMap<UpdateOrderVM, Order>();
+            CreateMap<Order, AddOrderVM>();
+            CreateMap<AddOrderVM, Order>();
+            #endregion
+
             #region OrderDetail
             CreateMap<OrderDetail, GetOrderDetailVM>();
             CreateMap<GetOrderDetailVM, OrderDetail>();
@@ -58,7 +82,7 @@ namespace NorthwindAPI.Profiles
             CreateMap<OrderDetail, UpdateOrderDetailVM>();
             CreateMap<UpdateOrderDetailVM, OrderDetail>();
             CreateMap<OrderDetail, AddOrderDetailVM>();
-            CreateMap<AddOrderDetailVM, Supplier>();
+            CreateMap<AddOrderDetailVM, OrderDetail>();
             #endregion
 
 

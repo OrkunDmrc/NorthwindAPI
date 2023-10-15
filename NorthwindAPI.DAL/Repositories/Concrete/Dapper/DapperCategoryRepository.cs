@@ -12,16 +12,6 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
         {
             var query = $"SELECT {GetColumns(tableAs: "c")} FROM {GetTableName(tableAs: "c")}, {GetTableName(entityType: typeof(Product), tableAs: "p")}  where p.ProductID = {id} and c.CategoryID = p.CategoryID";
             return await QueryAsync(query);
-            /*try
-            {
-                await using var connection = new SqlConnection(connectionString);
-                var queryResult = await connection.QuerySingleOrDefaultAsync<Category>(query);
-                return result.FillSuccessResult(queryResult);
-            }
-            catch (Exception ex)
-            {
-                return result.FillUnsuccessResult(ex.Message);
-            }*/
         }
     }
 }

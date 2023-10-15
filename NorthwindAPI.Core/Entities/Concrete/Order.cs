@@ -11,7 +11,7 @@ namespace NorthwindAPI.Core.Entities.Concrete
         [Column("OrderID")]
         public int OrderId { get; set; }
         [Column("CustomerID")]
-        public int? CustomerId { get; set; }
+        public string? CustomerId { get; set; }
         [Column("EmployeeID")]
         public int? EmployeeId { get; set; }
         [Column("OrderDate")]

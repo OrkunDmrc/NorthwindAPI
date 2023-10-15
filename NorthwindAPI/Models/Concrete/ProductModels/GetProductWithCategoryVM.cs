@@ -1,8 +1,9 @@
-﻿using NorthwindAPI.Models.Concrete.CategoryModels;
+﻿using NorthwindAPI.Models.Abstract;
+using NorthwindAPI.Models.Concrete.CategoryModels;
 
 namespace NorthwindAPI.Models.Concrete.ProductModels
 {
-    public class GetProductWithCategoryVM
+    public class GetProductWithCategoryVM : IViewModel
     {
         public int ProductId { get; set; }
         public string? ProductName { get; set; }
