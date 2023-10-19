@@ -28,6 +28,8 @@ builder.Services.AddSingleton<IOrderDetailService, OrderDetailService>();
 builder.Services.AddSingleton<ICustomerService, CustomerService>();
 builder.Services.AddSingleton<IShipperService, ShipperService>();
 builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+builder.Services.AddSingleton<IRegionService, RegionService>();
+builder.Services.AddSingleton<ITerritoryService, TerritoryService>();
 
 
 if (settings.ORM.ToLower() == "dapper")
@@ -40,6 +42,8 @@ if (settings.ORM.ToLower() == "dapper")
     builder.Services.AddSingleton<ICustomerRepository, DapperCustomerRepository>();
     builder.Services.AddSingleton<IShipperRepository, DapperShipperRepository>();
     builder.Services.AddSingleton<IEmployeeRepository, DapperEmployeeRepository>();
+    builder.Services.AddSingleton<IRegionRepository, DapperRegionRepository>();
+    builder.Services.AddSingleton<ITerritoryRepository, DapperTerritoryRepository>();
 }
 else if(settings.ORM.ToLower() == "ef")
 {
@@ -51,6 +55,8 @@ else if(settings.ORM.ToLower() == "ef")
     builder.Services.AddSingleton<ICustomerRepository, EFCustomerRepository>();
     builder.Services.AddSingleton<IShipperRepository, EFShipperRepository>();
     builder.Services.AddSingleton<IEmployeeRepository, EFEmployeeRepository>();
+    builder.Services.AddSingleton<IRegionRepository, EFRegionRepository>();
+    builder.Services.AddSingleton<ITerritoryRepository, EFTerritoryRepository>();
 }
 var app = builder.Build();
 

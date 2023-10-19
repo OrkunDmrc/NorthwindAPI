@@ -8,6 +8,8 @@ using NorthwindAPI.Models.Concrete.SuypplierModels;
 using NorthwindAPI.Models.Concrete.CustomerModels;
 using NorthwindAPI.Models.Concrete.ShipperModels;
 using NorthwindAPI.Models.Concrete.EmployeModels;
+using NorthwindAPI.Models.Concrete.Region;
+using NorthwindAPI.Models.Concrete.TerritoryModels;
 
 namespace NorthwindAPI.Profiles
 {
@@ -107,6 +109,28 @@ namespace NorthwindAPI.Profiles
             CreateMap<UpdateEmployeeVM, Employee>();
             CreateMap<Employee, AddEmployeeVM>();
             CreateMap<AddEmployeeVM, Employee>();
+            #endregion
+
+            #region Region
+            CreateMap<Region, GetRegionVM>();
+            CreateMap<GetRegionVM, Region>();
+            CreateMap<Region, DeleteRegionVM>();
+            CreateMap<DeleteRegionVM, Region>();
+            CreateMap<Region, UpdateRegionVM>();
+            CreateMap<UpdateRegionVM, Region>();
+            CreateMap<Region, AddRegionVM>();
+            CreateMap<AddRegionVM, Region>();
+            #endregion
+
+            #region Territory
+            CreateMap<Territory, GetTerritoryVM>();
+            CreateMap<GetTerritoryVM, Territory>();
+            CreateMap<Territory, DeleteTerritoryVM>();
+            CreateMap<DeleteTerritoryVM, Territory>();
+            CreateMap<Territory, UpdateTerritoryVM>();
+            CreateMap<UpdateTerritoryVM, Territory>();
+            CreateMap<Territory, AddTerritoryVM>();
+            CreateMap<AddTerritoryVM, Territory>();
             #endregion
 
         }

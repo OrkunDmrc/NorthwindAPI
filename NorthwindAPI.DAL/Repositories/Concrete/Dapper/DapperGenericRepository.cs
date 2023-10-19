@@ -4,7 +4,7 @@ using NorthwindAPI.Core.ApplicationSettings.Concrete;
 using NorthwindAPI.Core.Entities.Abstract;
 using NorthwindAPI.Core.Results.Abstract;
 using NorthwindAPI.Core.Results.Concrete;
-using NorthwindAPI.DAL.Repository.Abstract;
+using NorthwindAPI.DAL.Repositories.Abstract;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlClient;

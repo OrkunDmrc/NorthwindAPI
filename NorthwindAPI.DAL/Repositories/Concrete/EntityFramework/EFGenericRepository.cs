@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NorthwindAPI.Core.Entities.Abstract;
 using NorthwindAPI.Core.Results.Abstract;
 using NorthwindAPI.Core.Results.Concrete;
-using NorthwindAPI.DAL.Repository.Abstract;
+using NorthwindAPI.DAL.Repositories.Abstract;
 using System.Linq.Expressions;
 
 namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
@@ -23,7 +23,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
             try
             {
                 using var context = new C();
-                return resultList.FillSuccessResult(context.Set<T>().AsEnumerable());
+                return resultList.FillSuccessResult(context.Set<T>().AsEnumerable().ToList());
             }
             catch (Exception ex)
             {
@@ -35,7 +35,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
             try
             {
                 using var context = new C();
-                return resultList.FillSuccessResult(context.Set<T>().Where(filter).AsEnumerable());
+                return resultList.FillSuccessResult(context.Set<T>().Where(filter).AsEnumerable().ToList());
             }
             catch (Exception ex)
             {

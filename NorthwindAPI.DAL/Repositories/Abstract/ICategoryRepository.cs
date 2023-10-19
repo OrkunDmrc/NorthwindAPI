@@ -1,6 +1,6 @@
 ﻿using NorthwindAPI.Core.Entities.Concrete;
 using NorthwindAPI.Core.Results.Abstract;
-using NorthwindAPI.DAL.Repository.Abstract;
+using NorthwindAPI.DAL.Repositories.Abstract;
 
 namespace NorthwindAPI.DAL.Repositories.Abstract
 {

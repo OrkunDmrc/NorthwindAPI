@@ -1,5 +1,4 @@
 ﻿using NorthwindAPI.Core.Entities.Concrete;
-using NorthwindAPI.Core.Results.Abstract;
 using NorthwindAPI.DAL.Repositories.Abstract;
 using System;
 using System.Collections.Generic;
@@ -9,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace NorthwindAPI.DAL.Repositories.Abstract
 {
-    public interface IShipperRepository : IGenericRepository<Shipper, int>
+    public interface IRegionRepository : IGenericRepository<Region, int>
     {
-        Task<IResult<Shipper>> GetAllByOrderId(int id);
     }
 }

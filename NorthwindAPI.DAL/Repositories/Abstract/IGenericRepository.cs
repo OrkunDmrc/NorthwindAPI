@@ -2,7 +2,7 @@
 using NorthwindAPI.Core.Results.Abstract;
 using System.Linq.Expressions;
 
-namespace NorthwindAPI.DAL.Repository.Abstract
+namespace NorthwindAPI.DAL.Repositories.Abstract
 {
     public interface IGenericRepository<T, KeyT> where T : class, IEntity
     {

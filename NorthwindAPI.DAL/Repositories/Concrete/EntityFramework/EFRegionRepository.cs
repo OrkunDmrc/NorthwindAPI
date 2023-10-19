@@ -1,5 +1,4 @@
 ﻿using NorthwindAPI.Core.Entities.Concrete;
-using NorthwindAPI.Core.Results.Abstract;
 using NorthwindAPI.DAL.Repositories.Abstract;
 using System;
 using System.Collections.Generic;
@@ -7,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NorthwindAPI.DAL.Repositories.Abstract
+namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
 {
-    public interface IShipperRepository : IGenericRepository<Shipper, int>
+    public class EFRegionRepository : EFGenericRepository<Region, int, NorthwindContext>, IRegionRepository
     {
-        Task<IResult<Shipper>> GetAllByOrderId(int id);
     }
 }

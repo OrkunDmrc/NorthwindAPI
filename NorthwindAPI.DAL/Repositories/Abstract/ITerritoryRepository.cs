@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace NorthwindAPI.DAL.Repositories.Abstract
 {
-    public interface IShipperRepository : IGenericRepository<Shipper, int>
+    public interface ITerritoryRepository : IGenericRepository<Territory, string>
     {
-        Task<IResult<Shipper>> GetAllByOrderId(int id);
+        Task<IResult<IEnumerable<Territory>>> GetAllByRegionIdAsync(int id);
     }
 }

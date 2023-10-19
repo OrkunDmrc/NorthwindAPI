@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NorthwindAPI.BLL.Services.Abstract;
 using NorthwindAPI.Core.Entities.Concrete;
+using NorthwindAPI.Models.Concrete.OrderModels;
 using NorthwindAPI.Models.Concrete.ShipperModels;
 
 namespace NorthwindAPI.Controllers
@@ -57,7 +58,7 @@ namespace NorthwindAPI.Controllers
         public async Task<IActionResult> GetOrdersByShipperId(int id)
         {
             var result = await _orderService.GetAllByShipViaAsync(id);
-            return result.Success ? Ok(_mapper.Map<GetShipperVM>(result.Object)) : BadRequest(result.ErrorMessage);
+            return result.Success ? Ok(_mapper.Map<IEnumerable<GetOrderVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }
 
     }

@@ -11,7 +11,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
             var query = $"SELECT * FROM {GetTableName()} where ProductID = {id}";
             return await QueryListAsync(query);
         }
-        public async Task<IResult<IEnumerable<OrderDetail>>> GetListByOrderIdProductIdAsync(int orderId, int productId)
+        public async Task<IResult<IEnumerable<OrderDetail>>> GetAllByOrderIdProductIdAsync(int orderId, int productId)
         {
             var query = $"SELECT * FROM {GetTableName()} where OrderID = {orderId} and ProductID = {productId}";
             return await QueryListAsync(query);

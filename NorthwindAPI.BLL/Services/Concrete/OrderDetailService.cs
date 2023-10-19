@@ -38,7 +38,7 @@ namespace NorthwindAPI.BLL.Services.Concrete
         }
         public async Task<IResult<IEnumerable<OrderDetail>>> GetAllByOrderIdProductIdAsync(int orderId, int productId)
         {
-            return await _orderDetailRepository.GetListByOrderIdProductIdAsync(orderId, productId);
+            return await _orderDetailRepository.GetAllByOrderIdProductIdAsync(orderId, productId);
         }
         public async Task<IResult<OrderDetail>> DeleteByOrderIdProductIdAsync(int orderId, int productId)
         {
