@@ -41,9 +41,9 @@ namespace NorthwindAPI.Controllers
             return result.Success ? Ok(_mapper.Map<AddShipperVM>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         [HttpPut]
-        public async Task<IActionResult> Put(UpdateShipperVM categoryModel)
+        public async Task<IActionResult> Put(UpdateShipperVM model)
         {
-            var result = await _shipperService.UpdateAsync(_mapper.Map<Shipper>(categoryModel));
+            var result = await _shipperService.UpdateAsync(_mapper.Map<Shipper>(model));
             return result.Success ? Ok(_mapper.Map<UpdateShipperVM>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         [HttpDelete]

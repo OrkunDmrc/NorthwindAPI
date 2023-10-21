@@ -41,5 +41,10 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             return await _regionRepository.UpdateAsync(entity);
         }
+
+        public async Task<IResult<Region>> GetByTeritoryIdAsync(string id)
+        {
+            return await _regionRepository.GetByTeritoryIdAsync(id);
+        }
     }
 }

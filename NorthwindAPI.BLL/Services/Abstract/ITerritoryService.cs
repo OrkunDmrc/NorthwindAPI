@@ -11,5 +11,6 @@ namespace NorthwindAPI.BLL.Services.Abstract
     public interface ITerritoryService : IService<Territory, string>
     {
         Task<IResult<IEnumerable<Territory>>> GetAllByRegionIdAsync(int id);
+        Task<IResult<IEnumerable<Territory>>> GetAllByEmployeeIdAsync(int id);
     }
 }

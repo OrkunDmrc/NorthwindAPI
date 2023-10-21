@@ -6,6 +6,6 @@ namespace NorthwindAPI.BLL.Services.Abstract
 {
     public interface ICategoryService : IService<Category, int>
     {
-        Task<IResult<Category>> GetByProductId(int id);
+        Task<IResult<Category>> GetByProductIdAsync(int id);
     }
 }

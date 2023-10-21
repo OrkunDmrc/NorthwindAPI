@@ -19,21 +19,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
 
         public async Task<IResult<Customer>> GetByOrderIdAsync(int id)
         {
-            try
-            {
-                using (var context = new NorthwindContext())
-                {
-                    var queryResult = await (from c in context.Customers
-                                             join o in context.Orders on c.CustomerId equals o.CustomerId
-                                             where o.OrderId == id
-                                             select c).FirstOrDefaultAsync();
-                    return result.FillSuccessResult(queryResult);
-                }
-            }
-            catch (Exception ex)
-            {
-                return result.FillUnsuccessResult(ex.Message);
-            }
+            return await GetAsync(c => c.Orders.Any(o => o.OrderId == id));
         }
     }
 }

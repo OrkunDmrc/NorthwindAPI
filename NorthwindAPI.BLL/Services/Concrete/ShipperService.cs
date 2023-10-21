@@ -19,7 +19,7 @@ namespace NorthwindAPI.BLL.Services.Concrete
 
         public async Task<IResult<Shipper>> GetByOrderId(int id)
         {
-            return await _shipperRepository.GetAllByOrderId(id);
+            return await _shipperRepository.GetByOrderId(id);
         }
 
         public async Task<IResult<Shipper>> GetAsync(int id)

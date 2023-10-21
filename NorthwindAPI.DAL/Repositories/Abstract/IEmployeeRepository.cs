@@ -6,6 +6,7 @@ namespace NorthwindAPI.DAL.Repositories.Abstract
 {
     public interface IEmployeeRepository : IGenericRepository<Employee, int>
     {
-        Task<IResult<Employee>> GetByOrderId(int id);
+        Task<IResult<Employee>> GetByOrderIdAsync(int id);
+        Task<IResult<IEnumerable<Employee>>> GetAllByTeritoryIdAsync(string id);
     }
 }

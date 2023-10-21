@@ -42,9 +42,9 @@ namespace NorthwindAPI.Controllers
             return result.Success ? Ok(_mapper.Map<AddRegionVM>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         [HttpPut]
-        public async Task<IActionResult> Put(UpdateRegionVM categoryModel)
+        public async Task<IActionResult> Put(UpdateRegionVM model)
         {
-            var result = await _regionService.UpdateAsync(_mapper.Map<Region>(categoryModel));
+            var result = await _regionService.UpdateAsync(_mapper.Map<Region>(model));
             return result.Success ? Ok(_mapper.Map<UpdateRegionVM>(result.Object)) : BadRequest(result.ErrorMessage);
         }
         [HttpDelete]

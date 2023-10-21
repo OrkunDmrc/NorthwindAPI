@@ -8,5 +8,6 @@ namespace NorthwindAPI.DAL.Repositories.Abstract
     {
         Task<IResult<IEnumerable<Order>>> GetAllByShipViaAsync(int id);
         Task<IResult<IEnumerable<Order>>> GetAllByCustomerIdAsync(string id);
+        Task<IResult<IEnumerable<Order>>> GetAllByEmployeeIdAsync(int id);
     }
 }

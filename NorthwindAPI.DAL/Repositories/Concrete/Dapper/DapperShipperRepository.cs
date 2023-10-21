@@ -11,7 +11,7 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
 {
     public class DapperShipperRepository : DapperGenericRepository<Shipper, int>, IShipperRepository
     {
-        public async Task<IResult<Shipper>> GetAllByOrderId(int id)
+        public async Task<IResult<Shipper>> GetByOrderId(int id)
         {
             var query = $"SELECT {GetColumns(tableAs: "s")} FROM {GetTableName(tableAs: "s")}, {GetTableName(entityType: typeof(Order), tableAs: "o")}  where o.OrderID = {id} and s.ShipperID = o.ShipVia";
             return await QueryAsync(query);

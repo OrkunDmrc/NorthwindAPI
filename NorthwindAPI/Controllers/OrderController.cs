@@ -87,7 +87,7 @@ namespace NorthwindAPI.Controllers
         [Route("/Orders/{id}/Employee")]
         public async Task<IActionResult> GetEmployeeByOrderId(int id)
         {
-            var result = await _employeeService.GetByOrderId(id);
+            var result = await _employeeService.GetByOrderIdAsync(id);
             return result.Success ? Ok(_mapper.Map<GetEmployeeVM>(result.Object)) : BadRequest(result.ErrorMessage);
         }
 

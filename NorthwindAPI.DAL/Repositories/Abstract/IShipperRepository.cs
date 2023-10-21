@@ -11,6 +11,6 @@ namespace NorthwindAPI.DAL.Repositories.Abstract
 {
     public interface IShipperRepository : IGenericRepository<Shipper, int>
     {
-        Task<IResult<Shipper>> GetAllByOrderId(int id);
+        Task<IResult<Shipper>> GetByOrderId(int id);
     }
 }

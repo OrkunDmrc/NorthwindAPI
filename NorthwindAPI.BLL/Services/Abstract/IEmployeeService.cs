@@ -10,6 +10,7 @@ namespace NorthwindAPI.BLL.Services.Abstract
 {
     public interface IEmployeeService : IService<Employee, int>
     {
-        Task<IResult<Employee>> GetByOrderId(int id);
+        Task<IResult<Employee>> GetByOrderIdAsync(int id);
+        Task<IResult<IEnumerable<Employee>>> GetAllByTeritoryIdAsync(string id);
     }
 }

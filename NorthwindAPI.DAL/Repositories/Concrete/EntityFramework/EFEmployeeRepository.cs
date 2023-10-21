@@ -7,23 +7,14 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
 {
     public class EFEmployeeRepository : EFGenericRepository<Employee, int, NorthwindContext>, IEmployeeRepository
     {
-        public async Task<IResult<Employee>> GetByOrderId(int id)
+        public async Task<IResult<IEnumerable<Employee>>> GetAllByTeritoryIdAsync(string id)
         {
-            try
-            {
-                using (var context = new NorthwindContext())
-                {
-                    var queryResult = await(from e in context.Employees
-                                            join o in context.Orders on e.EmployeeId equals o.EmployeeId
-                                            where o.OrderId == id
-                                            select e).FirstOrDefaultAsync();
-                    return result.FillSuccessResult(queryResult);
-                }
-            }
-            catch (Exception ex)
-            {
-                return result.FillUnsuccessResult(ex.Message);
-            }
+            return await GetAllAsync(e => e.Territories.Any(t => t.TerritoryId == id));
+        }
+
+        public async Task<IResult<Employee>> GetByOrderIdAsync(int id)
+        {
+            return await GetAsync(e => e.Orders.Any(o => o.OrderId == id));
         }
     }
 }

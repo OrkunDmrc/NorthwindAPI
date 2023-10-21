@@ -11,7 +11,15 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.Dapper
 {
     public class DapperEmployeeRepository : DapperGenericRepository<Employee, int>, IEmployeeRepository
     {
-        public async Task<IResult<Employee>> GetByOrderId(int id)
+        public async Task<IResult<IEnumerable<Employee>>> GetAllByTeritoryIdAsync(string id)
+        {
+            var query = $"SELECT {GetColumns(tableAs: "e")} FROM {GetTableName(tableAs: "e")}" +
+                        $"JOIN {GetTableName(entityType: typeof(EmployeeTerritorry), tableAs: "et")} on e.EmployeeID = et.EmployeeID" +
+                        $"where et.TerritoryID = {id}";
+            return await QueryListAsync(query);
+        }
+
+        public async Task<IResult<Employee>> GetByOrderIdAsync(int id)
         {
             var query = $"SELECT {GetColumns(tableAs: "e")} FROM {GetTableName(tableAs: "e")}, {GetTableName(entityType: typeof(Order), tableAs: "o")}  where o.OrderID = {id} and o.EmployeeID = e.EmployeeID";
             return await QueryAsync(query);

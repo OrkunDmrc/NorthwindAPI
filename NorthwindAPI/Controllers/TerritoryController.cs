@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using NorthwindAPI.BLL.Services.Abstract;
 using NorthwindAPI.Core.Entities.Concrete;
+using NorthwindAPI.Models.Concrete.EmployeModels;
+using NorthwindAPI.Models.Concrete.Region;
 using NorthwindAPI.Models.Concrete.TerritoryModels;
 
 namespace NorthwindAPI.Controllers
@@ -12,11 +14,14 @@ namespace NorthwindAPI.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ITerritoryService _territoryService;
-
-        public TerritoryController(IMapper mapper, ITerritoryService categoryService)
+        private readonly IRegionService _regionService;
+        private readonly IEmployeeService _employeeService;
+        public TerritoryController(IMapper mapper, ITerritoryService categoryService, IRegionService regionService, IEmployeeService employeeService)
         {
             _mapper = mapper;
             _territoryService = categoryService;
+            _regionService = regionService;
+            _employeeService = employeeService;
         }
         [HttpGet]
         [Route("/Territories")]
@@ -50,6 +55,20 @@ namespace NorthwindAPI.Controllers
         {
             var result = await _territoryService.DeleteAsync(id);
             return result.Success ? Ok(_mapper.Map<DeleteTerritoryVM>(result.Object)) : BadRequest(result.ErrorMessage);
+        }
+        [HttpGet]
+        [Route("/Territories/{id}/Region")]
+        public async Task<IActionResult> GetRegionByTeritoryId(string id)
+        {
+            var result = await _regionService.GetByTeritoryIdAsync(id);
+            return result.Success ? Ok(_mapper.Map<GetRegionVM>(result.Object)) : BadRequest(result.ErrorMessage);
+        }
+        [HttpGet]
+        [Route("/Territories/{id}/Employees")]
+        public async Task<IActionResult> GetEmployeeByTeritoryId(string id)
+        {
+            var result = await _employeeService.GetAllByTeritoryIdAsync(id);
+            return result.Success ? Ok(_mapper.Map<IEnumerable<GetEmployeeVM>>(result.Object)) : BadRequest(result.ErrorMessage);
         }
     }
 }

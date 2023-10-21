@@ -12,5 +12,6 @@ namespace NorthwindAPI.DAL.Repositories.Abstract
     public interface ITerritoryRepository : IGenericRepository<Territory, string>
     {
         Task<IResult<IEnumerable<Territory>>> GetAllByRegionIdAsync(int id);
+        Task<IResult<IEnumerable<Territory>>> GetAllByEmployeeIdAsync(int id);
     }
 }

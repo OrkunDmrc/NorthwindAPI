@@ -47,5 +47,10 @@ namespace NorthwindAPI.BLL.Services.Concrete
         {
             return await _territoryRepository.GetAllByRegionIdAsync(id);
         }
+
+        public async Task<IResult<IEnumerable<Territory>>> GetAllByEmployeeIdAsync(int id)
+        {
+            return await _territoryRepository.GetAllByEmployeeIdAsync(id);
+        }
     }
 }

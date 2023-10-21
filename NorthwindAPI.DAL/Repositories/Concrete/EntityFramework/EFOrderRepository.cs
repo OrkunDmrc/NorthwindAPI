@@ -11,6 +11,11 @@ namespace NorthwindAPI.DAL.Repositories.Concrete.EntityFramework
             return await GetAllAsync(o => o.CustomerId == id);
         }
 
+        public async Task<IResult<IEnumerable<Order>>> GetAllByEmployeeIdAsync(int id)
+        {
+            return await GetAllAsync(o => o.EmployeeId == id);
+        }
+
         public async Task<IResult<IEnumerable<Order>>> GetAllByShipViaAsync(int id)
         {
             return await GetAllAsync(o => o.ShipVia == id);
