@@ -1,24 +1,37 @@
 # NorthwindAPI
-## .Net Core
-    - For Dapper appsettings.json > "ORM": "dapper"
-    - For EntityFramework appsettings.json > "ORM": "ef"
+
+NorthwindAPI is a .NET Core-based API that provides CRUD operations for managing entities in the Northwind database. It supports both Dapper and Entity Framework as ORMs, offering flexibility and ease of use.
+
 ### Features
-    1. CRUD operations.
-    2. MVC NortwindAPI.
-    3. Simple to understand architecture and operations.
-    4. Used MS-SQL as DBFirst.
-    5. Both ORMs can be used with a simple modification.
 
-### Technologies
-- .Net Core
-- Dapper
-- Microsoft.EntityFrameworkCore
-- Microsoft.EntityFrameworkCore.Design
-- Microsoft.EntityFrameworkCore.SqlSerer
-- Microsoft.EntityFrameworkCore.Tools
-- AutoMaper
+1. Full CRUD operations for all entities.
+2. Follows the MVC architecture for simplicity and maintainability.
+3. Easy-to-understand architecture and operations.
+4. Uses MS-SQL with a DB-First approach.
+5. Supports both Dapper and Entity Framework with minimal configuration changes.
 
-### End-points
+## Technologies Used
+
+- **.NET Core**
+- **Dapper**
+- **Entity Framework Core**
+  - Microsoft.EntityFrameworkCore
+  - Microsoft.EntityFrameworkCore.Design
+  - Microsoft.EntityFrameworkCore.SqlServer
+  - Microsoft.EntityFrameworkCore.Tools
+- **AutoMapper**
+
+## Configuration
+
+To switch between Dapper and Entity Framework, update the `ORM` setting in `appsettings.json`:
+
+```json 
+{ 
+    "ORM": "dapper" // Use "ef" for Entity Framework 
+}
+```
+
+### Endpoints
     - Category
         [GET]       .../Categories
         [GET]       .../Categories/id
@@ -97,3 +110,29 @@
         [PUT]       .../Territory
         [GET]       .../Territoriess/id/Region
         [GET]       .../Territoriess/id/Employees
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/OrkunDmrc/NorthwindAPI.git
+
+2. Navigate to the project directory:
+   ```bash
+   cd NorthwindAPI
+
+3. Restore dependencies:
+   ```bash
+   dotnet restore
+
+4. Update the `appsettings.json` file with your database connection string.
+
+5. Build the project:
+   ```bash
+   dotnet build
+
+6. Run the application:
+   ```bash
+   dotnet run
+
+7. Access the API at `https://localhost:5001` or `http://localhost:5000`.
